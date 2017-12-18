@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+        <item name="android:textColorPrimary">@color/amazingWhite</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+<!--        <item name="android:actionBarStyle">@style/ActionBarWhiteText</item>-->
+        <!--<item name="android:actionBarWidgetTheme">@android:style/Theme.Holo</item>-->
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SmallText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-regular</item>
+    </style>
+
+    <style name="HeadlineText" parent="@android:style/TextAppearance.Large">
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <style name="BodyText" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!--
+        <style name="ActionBarWhiteText" parent="@style/Widget.AppCompat.ActionBar">
+            <item name="colorControlNormal">@android:color/white</item>
+            <item name="titleTextStyle">@style/TitleActionBarTextStyle</item>
+            <item name="actionOverflowButtonStyle">@style/OverflowActionBarTextStyle</item> &lt;!&ndash; sets the style for the overflow button &ndash;&gt;
+
+        </style>
+
+        <style name="TitleActionBarTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+            <item name="android:textColor">@android:color/white</item>
+        </style>
+        <style name="OverflowActionBarTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+            <item name="android:textColor">@android:color/white</item>
+        </style>
+        <style name="AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+            &lt;!&ndash; THIS is where you can color the arrow and the overflow button! &ndash;&gt;
+            <item name="colorControlNormal">@android:color/white</item> &lt;!&ndash; sets the color for the back arrow &ndash;&gt;
+            <item name="actionOverflowButtonStyle">@style/OverflowActionBarTextStyle</item> &lt;!&ndash; sets the style for the overflow button &ndash;&gt;
+        </style>-->
+
+</resources>

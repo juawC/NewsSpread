@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="article" type="com.juawapps.newsspread.data.objects.Article"/>
+        <variable name="readMoreHandler" type="com.juawapps.newsspread.ui.news.ReadMoreHandler"/>
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="12dp"
+    android:background="@drawable/list_item_background"
+    android:onClick="@{() -> readMoreHandler.onReadMoreClick(article.url)}"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/news_item_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="16dp"
+        tools:text="CNN"
+        android:layout_marginBottom="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:textColor="@color/lessSoAmazingWhite"
+        android:text="@{article.source.name}"
+        android:textAppearance="@style/SmallText" />
+
+    <ImageView
+        android:id="@+id/news_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_image_height"
+        android:scaleType="centerCrop"
+        android:background="@color/colorPrimary"
+        app:imageUrl="@{article.urlToImage}" />
+    
+
+    <TextView
+        android:id="@+id/news_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="4dp"
+        tools:text="Boring title"
+        android:text="@{article.title}"
+        android:textAppearance="@style/HeadlineText" />
+
+    <TextView
+        android:id="@+id/news_item_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:text="@{article.description}"
+        tools:text="Bla bla, things happen..."
+        android:textAppearance="@style/BodyText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/dimColorText"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:text="@string/read_more"
+        android:textAppearance="@style/BodyText" />
+</LinearLayout>
+</layout>

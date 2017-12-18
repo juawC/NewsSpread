@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name" translatable="false">NewsSpread</string>
+    <string name="business_label">Business</string>
+    <string name="entertainment_label">Entertainment</string>
+    <string name="gaming_label">Gaming</string>
+    <string name="general_label">General</string>
+    <string name="health_and_medical_label">Health and medical</string>
+    <string name="music_label">Music</string>
+    <string name="politics_label">Politics</string>
+    <string name="science_and_nature_label">Science and nature</string>
+    <string name="sport_label">Sport</string>
+    <string name="technology_label">Technology</string>
+    <string name="read_more">Read more</string>
+</resources>
