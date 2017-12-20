@@ -93,13 +93,10 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         });
     }
 
-    public final LiveData<Resource<ResultType>> getAsLiveData() {
-        return result;
-    }
-
     private void onFetchFailed() {
     }
 
+    @SuppressWarnings("WeakerAccess")
     public LiveData<Resource<ResultType>> asLiveData() {
         return result;
     }
@@ -112,6 +109,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     @WorkerThread
     protected abstract void saveCallResult(@NonNull RequestType item);
 
+    @SuppressWarnings({"SameReturnValue", "unused"})
     @MainThread
     protected abstract boolean shouldFetch(@Nullable ResultType data);
 

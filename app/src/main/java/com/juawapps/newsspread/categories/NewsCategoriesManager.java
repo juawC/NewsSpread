@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by joaocevada on 09/12/2017.
+ * News categories manager.
+ * <p>
+ * This class only gets the default categories but in the future is to have the categories
+ * customizable.
  */
 
 public class NewsCategoriesManager {

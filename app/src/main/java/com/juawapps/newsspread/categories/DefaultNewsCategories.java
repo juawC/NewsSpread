@@ -7,7 +7,7 @@ import com.juawapps.newsspread.R;
 import java.util.Collection;
 
 /**
- * Created by joaocevada on 09/12/2017.
+ * Default categories definition.
  */
 
 class DefaultNewsCategories {
@@ -40,7 +40,7 @@ class DefaultNewsCategories {
         mCategoryLabels.put(TECHNOLOGY, new NewsCategory(TECHNOLOGY, R.string.technology_label));
     }
 
-    public static Collection<NewsCategory> getCategories() {
+    static Collection<NewsCategory> getCategories() {
        return mCategoryLabels.values();
     }
 

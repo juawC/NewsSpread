@@ -4,10 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by joaocevada on 09/12/2017.
+ * Class holding a news category object.
  */
 
-public class NewsCategory implements Parcelable{
+@SuppressWarnings({"unused", "WeakerAccess"})
+public class NewsCategory implements Parcelable {
     private final int mLabel;
     private final String mKey;
 

@@ -12,7 +12,7 @@ import okhttp3.Response;
 import static com.juawapps.newsspread.data.api.ApiConfigs.API_KEY;
 
 /**
- * Created by joaocevada on 14/12/2017.
+ * Interceptor for setting the api key
  */
 
 public class ApiKeyInterceptor implements Interceptor {

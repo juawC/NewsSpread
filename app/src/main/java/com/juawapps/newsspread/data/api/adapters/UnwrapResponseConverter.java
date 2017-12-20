@@ -1,5 +1,7 @@
 package com.juawapps.newsspread.data.api.adapters;
 
+import android.support.annotation.NonNull;
+
 import com.juawapps.newsspread.data.api.ApiStatus;
 
 import java.io.IOException;
@@ -8,7 +10,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
 /**
- * Created by joaocevada on 14/12/2017.
+ * Unwraps the object response from the api to the actual object.
  */
 
 class UnwrapResponseConverter<T>
@@ -16,13 +18,13 @@ class UnwrapResponseConverter<T>
 
     private final Converter<ResponseBody, WrappedApiResponse<T>> converter;
 
-    public UnwrapResponseConverter(Converter<ResponseBody,
+    UnwrapResponseConverter(Converter<ResponseBody,
             WrappedApiResponse<T>> converter) {
         this.converter = converter;
     }
 
     @Override
-    public T convert(ResponseBody value) throws IOException {
+    public T convert(@NonNull ResponseBody value) throws IOException {
         WrappedApiResponse<T> response = converter.convert(value);
 
         if (response.getStatus().equalsIgnoreCase(ApiStatus.STATUS_OK)) {

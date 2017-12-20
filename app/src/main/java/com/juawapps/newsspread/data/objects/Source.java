@@ -1,9 +1,7 @@
 package com.juawapps.newsspread.data.objects;
 
-/**
- * Created by joaocevada on 10/12/2017.
- */
 
+@SuppressWarnings("unused")
 public class Source {
 
     /**

@@ -14,9 +14,6 @@ import com.juawapps.newsspread.data.api.NewsapiService;
 
 import java.util.List;
 
-/**
- * Created by joaocevada on 10/12/2017.
- */
 
 public class ArticlesRepository {
     private final NewsapiService mNewsapiService;

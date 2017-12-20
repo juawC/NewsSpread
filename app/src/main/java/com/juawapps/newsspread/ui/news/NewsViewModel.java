@@ -12,9 +12,6 @@ import com.juawapps.newsspread.data.objects.Article;
 
 import java.util.List;
 
-/**
- * Created by joaocevada on 15/12/2017.
- */
 
 public class NewsViewModel extends ViewModel {
 
@@ -47,7 +44,7 @@ public class NewsViewModel extends ViewModel {
         private final MutableLiveData<String> mRequestStream;
         private final LiveData<Resource<List<Article>>> mResultStream ;
 
-        public ArticlesLiveData(ArticlesRepository articlesRepository) {
+        ArticlesLiveData(ArticlesRepository articlesRepository) {
             mArticlesRepository = articlesRepository;
             mRequestStream = new MutableLiveData<>();
             mResultStream =
@@ -56,7 +53,7 @@ public class NewsViewModel extends ViewModel {
 
         }
 
-        public LiveData<Resource<List<Article>>> getResultStream() {
+        LiveData<Resource<List<Article>>> getResultStream() {
             return mResultStream;
         }
 

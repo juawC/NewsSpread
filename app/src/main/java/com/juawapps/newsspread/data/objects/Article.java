@@ -7,9 +7,6 @@ import android.support.annotation.NonNull;
 
 import java.util.Date;
 
-/**
- * Created by joaocevada on 10/12/2017.
- */
 @SuppressWarnings("NullableProblems")
 @Entity(tableName = "articles", primaryKeys = {"author", "title"})
 public class Article {

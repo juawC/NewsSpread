@@ -7,9 +7,6 @@ import android.support.annotation.NonNull;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/**
- * Created by joaocevada on 13/12/2017.
- */
 
 public class AppExecutors {
 
@@ -36,6 +33,7 @@ public class AppExecutors {
         return mDiskIO;
     }
 
+    @SuppressWarnings("unused")
     public Executor networkIO() {
         return mNetworkIO;
     }

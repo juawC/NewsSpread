@@ -1,7 +1,7 @@
 package com.juawapps.newsspread.data.api;
 
 /**
- * Created by joaocevada on 14/12/2017.
+ * Class with expected status responses.
  */
 
 public class ApiStatus {

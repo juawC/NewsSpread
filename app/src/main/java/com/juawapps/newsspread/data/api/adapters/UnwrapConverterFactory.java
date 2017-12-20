@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by joaocevada on 14/12/2017.
+ * Factory to unwrap an api response to an actual object without the {status="status", content="content"} object.
  */
 
 public class UnwrapConverterFactory extends Converter.Factory {
@@ -45,6 +45,7 @@ public class UnwrapConverterFactory extends Converter.Factory {
         Converter<ResponseBody, ?> gsonConverter = factory
                 .responseBodyConverter(wrappedType, annotations, retrofit);
 
+        //noinspection unchecked
         return new UnwrapResponseConverter(gsonConverter);
     }
 

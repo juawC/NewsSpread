@@ -14,7 +14,7 @@ import static com.juawapps.newsspread.data.api.ApiConfigs.HOST;
 
 
 /**
- * Created by joaocevada on 10/12/2017.
+ * Provides an api service object.
  */
 
 public class ApiProvider {

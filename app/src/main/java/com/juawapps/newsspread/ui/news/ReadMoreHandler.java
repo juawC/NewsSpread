@@ -1,11 +1,13 @@
 package com.juawapps.newsspread.ui.news;
 
+import android.view.View;
+
 import com.juawapps.newsspread.web.CustomTabHelper;
 
 /**
- * Created by joaocevada on 10/12/2017.
+ * Handler class to manage news items clicks.
  */
-
+@SuppressWarnings("WeakerAccess")
 public class ReadMoreHandler {
 
     private final CustomTabHelper mCustomTabHelper;
@@ -14,7 +16,7 @@ public class ReadMoreHandler {
         mCustomTabHelper = customTabHelper;
     }
 
-    public void onReadMoreClick(String url) {
-        mCustomTabHelper.openNewTab(url);
+    public void onReadMoreClick(String url, View view) {
+        mCustomTabHelper.openNewTab(url, view.getContext());
     }
 }

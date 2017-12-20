@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
  * Data Binding adapters specific to the app.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class BindingAdapters {
     @BindingAdapter("recyclerAdapter")
     public static void setAdapter(RecyclerView view, RecyclerView.Adapter adapter) {

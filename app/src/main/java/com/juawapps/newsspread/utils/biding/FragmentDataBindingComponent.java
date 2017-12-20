@@ -4,7 +4,7 @@ import android.databinding.DataBindingComponent;
 import android.support.v4.app.Fragment;
 
 /**
- * Created by joaocevada on 16/12/2017.
+ * Component for seting fragment binding adapters.
  */
 
 public class FragmentDataBindingComponent implements DataBindingComponent {

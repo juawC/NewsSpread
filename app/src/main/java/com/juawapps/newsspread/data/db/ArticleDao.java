@@ -11,9 +11,8 @@ import com.juawapps.newsspread.data.objects.Article;
 
 import java.util.List;
 
-/**
- * Created by joaocevada on 13/12/2017.
- */
+
+@SuppressWarnings("unused")
 @Dao
 public interface ArticleDao {
 

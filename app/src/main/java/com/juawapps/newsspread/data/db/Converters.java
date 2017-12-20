@@ -5,9 +5,9 @@ import android.arch.persistence.room.TypeConverter;
 import java.util.Date;
 
 /**
- * Created by joaocevada on 17/12/2017.
+ * Custom database converters.
  */
-
+@SuppressWarnings("WeakerAccess")
 class Converters {
     @TypeConverter
     public static Date fromTimestamp(Long value) {

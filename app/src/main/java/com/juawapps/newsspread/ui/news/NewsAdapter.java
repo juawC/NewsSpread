@@ -18,16 +18,13 @@ import com.juawapps.newsspread.web.CustomTabHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private List<Article> mValues = new ArrayList<>();
     private final ReadMoreHandler mReadMoreHandler;
     private final DataBindingComponent mDataBindingComponent;
 
-    public NewsAdapter(@NonNull LifecycleOwner viewLifeCycle,
+    NewsAdapter(@NonNull LifecycleOwner viewLifeCycle,
                        DataBindingComponent dataBindingComponent,
                        CustomTabHelper customTabHelper,
                        LiveData<Resource<List<Article>>> liveDataArticles) {
@@ -64,15 +61,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         return mValues.size();
     }
 
-    public class NewsViewHolder extends RecyclerView.ViewHolder {
+    class NewsViewHolder extends RecyclerView.ViewHolder {
         private final NewsItemBinding binding;
 
-        public NewsViewHolder(NewsItemBinding binding) {
+        NewsViewHolder(NewsItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bind(Article article, ReadMoreHandler readMoreHandler) {
+        void bind(Article article, ReadMoreHandler readMoreHandler) {
             binding.setArticle(article);
             binding.setReadMoreHandler(readMoreHandler);
             binding.executePendingBindings();

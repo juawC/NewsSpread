@@ -11,9 +11,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by joaocevada on 10/12/2017.
+ * News api service.
  */
-
+@SuppressWarnings("unused")
 public interface NewsapiService {
 
     @GET("v2/top-headlines")

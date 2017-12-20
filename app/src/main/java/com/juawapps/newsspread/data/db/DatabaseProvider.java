@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 /**
- * Created by joaocevada on 14/12/2017.
+ * Provides a database service.
  */
 
 public class DatabaseProvider {

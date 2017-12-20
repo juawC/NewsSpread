@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         final List<NewsCategory> mNewsCategories;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
             mNewsCategories = mCategoriesManager.getCategories();
         }

@@ -14,13 +14,12 @@ import android.support.v4.content.ContextCompat;
 import com.juawapps.newsspread.R;
 
 /**
- * Created by joaocevada on 17/12/2017.
+ * Manage custom tabs, warming up the service for the tabs to load faster.
  */
 
 public class CustomTabHelper {
 
     private CustomTabsIntent mCustomTabsIntent;
-    private final Context mContext;
     private static final String CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome";
 
     private static CustomTabHelper sInstance;
@@ -37,40 +36,38 @@ public class CustomTabHelper {
     }
 
     private CustomTabHelper(Activity activity) {
-        mContext = activity;
-        CustomTabsClient.bindCustomTabsService(mContext, CUSTOM_TAB_PACKAGE_NAME, mConnection);
+        CustomTabsClient.bindCustomTabsService(activity, CUSTOM_TAB_PACKAGE_NAME,
+                new CustomTabsServiceConnection() {
+            @Override
+            public void onCustomTabsServiceConnected(ComponentName name, CustomTabsClient client) {
+                client.warmup(0);
+                mCustomTabsIntent = buildIntent(client, activity);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                mCustomTabsIntent = null;
+            }
+        });
     }
 
-    public void openNewTab(String url) {
+    public void openNewTab(String url, Context context) {
         if (mCustomTabsIntent != null) {
-            mCustomTabsIntent.launchUrl(mContext, Uri.parse(url));
+            mCustomTabsIntent.launchUrl(context, Uri.parse(url));
         } else {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            mContext.startActivity(browserIntent);
+            context.startActivity(browserIntent);
         }
     }
 
-    private final CustomTabsServiceConnection mConnection = new CustomTabsServiceConnection() {
-        @Override
-        public void onCustomTabsServiceConnected(ComponentName name, CustomTabsClient client) {
-            client.warmup(0);
-            mCustomTabsIntent = buildIntent(client);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mCustomTabsIntent = null;
-        }
-    };
-
-    private CustomTabsIntent buildIntent(CustomTabsClient customTabsClient) {
+    private CustomTabsIntent buildIntent(CustomTabsClient customTabsClient, Activity activity) {
         // Create session
         CustomTabsSession customTabsSession = customTabsClient.newSession(null);
         // Built intent
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder(customTabsSession);
-        builder.setToolbarColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
-        builder.setStartAnimations(mContext, R.anim.slide_in_right, R.anim.slide_out_left);
-        builder.setExitAnimations(mContext, R.anim.slide_in_left, R.anim.slide_out_right);
+        builder.setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        builder.setStartAnimations(activity, R.anim.slide_in_right, R.anim.slide_out_left);
+        builder.setExitAnimations(activity, R.anim.slide_in_left, R.anim.slide_out_right);
         return builder.build();
     }
 }

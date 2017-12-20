@@ -1,9 +1,9 @@
 package com.juawapps.newsspread.data.api;
 
 /**
- * Created by joaocevada on 14/12/2017.
+ * Api configurations.
  */
-
+@SuppressWarnings("WeakerAccess")
 public class ApiConfigs {
 
     public static final String HOST = "https://newsapi.org";

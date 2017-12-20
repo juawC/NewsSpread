@@ -10,9 +10,9 @@ import timber.log.Timber;
 
 
 /**
- * Created by joaocevada on 16/12/2017.
+ * Fragment view binders.
  */
-
+@SuppressWarnings("WeakerAccess")
 public class FragmentBindingAdapters {
     private final Fragment fragment;
 

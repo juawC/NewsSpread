@@ -18,6 +18,7 @@ package com.juawapps.newsspread.data.api.adapters;
 
 
 import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 
 import com.juawapps.newsspread.data.api.ApiResponseWrapper;
 
@@ -36,7 +37,7 @@ import retrofit2.Response;
  */
 class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<ApiResponseWrapper<R>>> {
     private final Type mResponseType;
-    public LiveDataCallAdapter(Type responseType) {
+    LiveDataCallAdapter(Type responseType) {
         this.mResponseType = responseType;
     }
 
@@ -46,7 +47,7 @@ class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<ApiResponseWrapp
     }
 
     @Override
-    public LiveData<ApiResponseWrapper<R>> adapt(Call<R> call) {
+    public LiveData<ApiResponseWrapper<R>> adapt(@NonNull Call<R> call) {
         return new LiveData<ApiResponseWrapper<R>>() {
             final AtomicBoolean started = new AtomicBoolean(false);
             @Override
@@ -55,12 +56,12 @@ class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<ApiResponseWrapp
                 if (started.compareAndSet(false, true)) {
                     call.enqueue(new Callback<R>() {
                         @Override
-                        public void onResponse(Call<R> call, Response<R> response) {
+                        public void onResponse(@NonNull Call<R> call, @NonNull Response<R> response) {
                             postValue(new ApiResponseWrapper<>(response));
                         }
 
                         @Override
-                        public void onFailure(Call<R> call, Throwable throwable) {
+                        public void onFailure(@NonNull Call<R> call, @NonNull Throwable throwable) {
                             postValue(new ApiResponseWrapper<>(throwable));
                         }
                     });

@@ -16,6 +16,7 @@ import static com.juawapps.newsspread.data.Resource.Status.SUCCESS;
  * A generic class that holds a value with its loading status.
  * @param <T>
  */
+@SuppressWarnings("WeakerAccess")
 public class Resource<T> {
 
     /**
@@ -68,10 +69,7 @@ public class Resource<T> {
 
         Resource<?> resource = (Resource<?>) o;
 
-        if (status != resource.status) {
-            return false;
-        }
-        return (message != null ? message.equals(resource.message) : resource.message == null) && (data != null ? data.equals(resource.data) : resource.data == null);
+        return status == resource.status && (message != null ? message.equals(resource.message) : resource.message == null) && (data != null ? data.equals(resource.data) : resource.data == null);
     }
 
     @Override

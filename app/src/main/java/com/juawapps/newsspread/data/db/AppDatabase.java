@@ -7,9 +7,9 @@ import android.arch.persistence.room.TypeConverters;
 import com.juawapps.newsspread.data.objects.Article;
 
 /**
- * Created by joaocevada on 13/12/2017.
+ * App database.
  */
-@Database(entities = {Article.class}, version = 2)
+@Database(entities = {Article.class}, version = 2, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ArticleDao articleDao();

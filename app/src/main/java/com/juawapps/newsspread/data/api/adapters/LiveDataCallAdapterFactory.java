@@ -17,6 +17,7 @@
 package com.juawapps.newsspread.data.api.adapters;
 
 import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 
 import com.juawapps.newsspread.data.api.ApiResponseWrapper;
 
@@ -30,7 +31,7 @@ import retrofit2.Retrofit;
 public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
     @Override
-    public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
+    public CallAdapter<?, ?> get(@NonNull Type returnType, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
         if (getRawType(returnType) != LiveData.class) {
             return null;
         }
