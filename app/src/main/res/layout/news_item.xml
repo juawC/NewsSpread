@@ -6,13 +6,12 @@
         <variable name="article" type="com.juawapps.newsspread.data.objects.Article"/>
         <variable name="readMoreHandler" type="com.juawapps.newsspread.ui.news.ReadMoreHandler"/>
     </data>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="12dp"
     android:background="@drawable/list_item_background"
-    android:onClick="@{view -> readMoreHandler.onReadMoreClick(article.url, view)}"
-    android:orientation="vertical">
+    android:onClick="@{view -> readMoreHandler.onReadMoreClick(article.url, view)}">
 
     <TextView
         android:id="@+id/news_item_source"
@@ -28,13 +27,38 @@
         android:textSize="12sp"
         android:textColor="@color/lessSoAmazingWhite"
         android:text="@{article.source.name}"
-        android:textAppearance="@style/SmallText" />
+        android:textAppearance="@style/SmallText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/news_item_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        tools:text="1 day ago"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginStart="8dp"
+        android:textSize="12sp"
+        android:textColor="@color/dimColorText"
+        android:textAppearance="@style/SmallText"
+        app:setAgeFromDate="@{article.publishedAt}"
+        app:layout_constraintStart_toEndOf="@+id/news_item_source"
+        app:layout_constraintBaseline_toBaselineOf="@+id/news_item_source"
+        />
 
     <ImageView
         android:id="@+id/news_item_image"
         android:layout_width="match_parent"
+        android:layout_marginTop="4dp"
         android:layout_height="@dimen/news_image_height"
         android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news_item_source"
         android:background="@color/colorPrimary"
         app:imageUrl="@{article.urlToImage}"
         tools:ignore="ContentDescription" />
@@ -46,6 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news_item_image"
         android:layout_marginTop="4dp"
         tools:text="Boring title"
         android:text="@{article.title}"
@@ -59,6 +85,8 @@
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:text="@{article.description}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news_item_title"
         tools:text="Bla bla, things happen..."
         android:textAppearance="@style/BodyText" />
 
@@ -70,7 +98,9 @@
         android:gravity="center"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news_item_subtitle"
         android:text="@string/read_more"
         android:textAppearance="@style/BodyText" />
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
 </layout>
