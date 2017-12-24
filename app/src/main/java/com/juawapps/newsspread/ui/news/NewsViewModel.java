@@ -9,57 +9,35 @@ import android.support.v4.util.SimpleArrayMap;
 import com.juawapps.newsspread.data.ArticlesRepository;
 import com.juawapps.newsspread.data.Resource;
 import com.juawapps.newsspread.data.objects.Article;
+import com.juawapps.newsspread.ui.common.RetryCallback;
 
 import java.util.List;
 
 
-public class NewsViewModel extends ViewModel {
+public class NewsViewModel extends ViewModel implements RetryCallback {
 
-    private final SimpleArrayMap<String, ArticlesLiveData> mArticlesMap =
-            new SimpleArrayMap<>();
-
+    private final MutableLiveData<String> mRequestStream = new MutableLiveData<>();
+    private final LiveData<Resource<List<Article>>> mResultStream;
     private final ArticlesRepository mArticlesRepository;
+
+    private String mCategory;
 
     public NewsViewModel (ArticlesRepository articlesRepository) {
         mArticlesRepository = articlesRepository;
+        mResultStream = Transformations.switchMap(mRequestStream, mArticlesRepository::getArticles);
     }
 
-    LiveData<Resource<List<Article>>> getArticleByCategory(String category) {
+    public void setCategory(String category) {
+        mRequestStream.postValue(category);
+        mCategory = category;
+    }
+    LiveData<Resource<List<Article>>> getArticles() {
 
-        ArticlesLiveData articlesLiveData;
-
-        if (mArticlesMap.containsKey(category) ) {
-            articlesLiveData = mArticlesMap.get(category);
-        } else {
-            articlesLiveData = new ArticlesLiveData(mArticlesRepository);
-            mArticlesMap.put(category, articlesLiveData);
-        }
-        articlesLiveData.setCategory(category);
-        return articlesLiveData.getResultStream();
+        return mResultStream;
     }
 
-    private static class ArticlesLiveData {
-
-        private final ArticlesRepository mArticlesRepository;
-        private final MutableLiveData<String> mRequestStream;
-        private final LiveData<Resource<List<Article>>> mResultStream ;
-
-        ArticlesLiveData(ArticlesRepository articlesRepository) {
-            mArticlesRepository = articlesRepository;
-            mRequestStream = new MutableLiveData<>();
-            mResultStream =
-                    Transformations.switchMap(mRequestStream,
-                            mArticlesRepository::getArticles);
-
-        }
-
-        LiveData<Resource<List<Article>>> getResultStream() {
-            return mResultStream;
-        }
-
-        public void setCategory(String category) {
-            mRequestStream.postValue(category);
-        }
-
+    @Override
+    public void onRetry() {
+        setCategory(mCategory);
     }
 }

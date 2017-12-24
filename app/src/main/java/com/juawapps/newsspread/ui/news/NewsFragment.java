@@ -1,5 +1,6 @@
 package com.juawapps.newsspread.ui.news;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingComponent;
 import android.graphics.drawable.Drawable;
@@ -14,10 +15,14 @@ import android.view.ViewGroup;
 
 import com.juawapps.newsspread.R;
 import com.juawapps.newsspread.categories.NewsCategory;
+import com.juawapps.newsspread.data.Resource;
+import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.databinding.FragmentNewsListBinding;
 import com.juawapps.newsspread.utils.biding.FragmentDataBindingComponent;
 import com.juawapps.newsspread.utils.viewmodel.ViewModelFactory;
 import com.juawapps.newsspread.web.CustomTabHelper;
+
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -63,6 +68,12 @@ public class NewsFragment extends Fragment {
         mCustomTabHelper = CustomTabHelper.get(getActivity());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mNewsViewModel.setCategory(mNewsCategory.getKey());
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -71,17 +82,25 @@ public class NewsFragment extends Fragment {
         FragmentNewsListBinding binding =
                 FragmentNewsListBinding.inflate(inflater, container, false);
 
-        binding.setAdapter(new NewsAdapter(this, mDataBindingComponent,
-                mCustomTabHelper,
-                mNewsViewModel.getArticleByCategory(mNewsCategory.getKey())));
+        // Get articles live data
+        LiveData<Resource<List<Article>>> articleList = mNewsViewModel.getArticles();
 
+        // Bind article adapter
+        binding.setAdapter(new NewsAdapter(this, mDataBindingComponent,
+                mCustomTabHelper, articleList));
+
+        // Bind list divider
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL);
-
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(),
                 R.drawable.line_divider);
         dividerItemDecoration.setDrawable(dividerDrawable);
         binding.setDecoration(dividerItemDecoration);
+
+        // Bind view state view
+        articleList.observe(this, binding::setResource);
+        binding.setRetryCallback(mNewsViewModel);
+
         return binding.getRoot();
     }
 }

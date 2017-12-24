@@ -11,4 +11,6 @@
     <string name="sport_label">Sport</string>
     <string name="technology_label">Technology</string>
     <string name="read_more">Read more</string>
+    <string name="oops_something_went_wrong">Oops, something went wrong…</string>
+    <string name="try_again">Try again</string>
 </resources>
