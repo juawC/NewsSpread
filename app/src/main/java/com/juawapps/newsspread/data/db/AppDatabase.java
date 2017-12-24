@@ -9,7 +9,7 @@ import com.juawapps.newsspread.data.objects.Article;
 /**
  * App database.
  */
-@Database(entities = {Article.class}, version = 2, exportSchema = false)
+@Database(entities = {Article.class}, version = 3, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ArticleDao articleDao();

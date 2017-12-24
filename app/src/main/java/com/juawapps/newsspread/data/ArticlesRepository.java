@@ -4,14 +4,17 @@ import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.format.DateUtils;
 
 import com.juawapps.newsspread.data.api.ApiProvider;
 import com.juawapps.newsspread.data.api.ApiResponseWrapper;
 import com.juawapps.newsspread.data.db.ArticleDao;
 import com.juawapps.newsspread.data.db.DatabaseProvider;
+import com.juawapps.newsspread.data.db.DbConfigs;
 import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.data.api.NewsapiService;
 
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -20,7 +23,7 @@ public class ArticlesRepository {
     private final ArticleDao mArticleDao;
     private static ArticlesRepository sInstance;
 
-    private ArticlesRepository (Context applicationContext) {
+    private ArticlesRepository(Context applicationContext) {
         mNewsapiService = ApiProvider.getNewsapiService();
         mArticleDao = DatabaseProvider.getAppDatabase(applicationContext).articleDao();
     }
@@ -46,6 +49,8 @@ public class ArticlesRepository {
                     article.setCategory(categoryKey);
                 }
                 mArticleDao.insertArticles(items);
+                // Delete old articles
+                mArticleDao.deleteOlderArticles(getOldestArticleAllowedDate());
             }
 
             @Override
@@ -65,6 +70,12 @@ public class ArticlesRepository {
                 return mNewsapiService.topHeadLines(categoryKey);
             }
         }.asLiveData();
-}
+    }
+
+
+    private static long getOldestArticleAllowedDate() {
+        return Calendar.getInstance().getTimeInMillis() -
+                DbConfigs.MAX_ARTICLE_AGE_DAYS * DateUtils.DAY_IN_MILLIS;
+    }
 
 }

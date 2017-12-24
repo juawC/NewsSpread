@@ -22,6 +22,9 @@ public interface ArticleDao {
     @Delete
     void deleteArticles(Article... articles);
 
+    @Query("DELETE FROM articles WHERE published_at < :oldestDate")
+    void deleteOlderArticles(long oldestDate);
+
     @Query("SELECT * FROM articles")
     LiveData<List<Article>> loadAllArticles();
 
