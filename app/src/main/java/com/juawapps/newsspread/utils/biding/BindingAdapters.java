@@ -50,8 +50,11 @@ public class BindingAdapters {
             view.setText(resources.getQuantityString(R.plurals.days, days, days));
         } else if (hours > 0) {
             view.setText(resources.getQuantityString(R.plurals.hours, hours, hours));
-        } else {
+        } else if (minutes > 0){
             view.setText(resources.getQuantityString(R.plurals.minutes, minutes, minutes));
+        } else {
+            // In case of an ahead timezone timestamp
+            view.setText(null);
         }
     }
 

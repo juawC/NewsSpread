@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.juawapps.newsspread.data.api.adapters.LiveDataCallAdapterFactory;
 import com.juawapps.newsspread.data.api.adapters.UnwrapConverterFactory;
 import com.juawapps.newsspread.data.api.interceptors.ApiKeyInterceptor;
+import com.juawapps.newsspread.data.api.interceptors.LanguageInterceptor;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -26,7 +27,8 @@ public class ApiProvider {
     private ApiProvider() {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-                .addInterceptor(new ApiKeyInterceptor());
+                .addInterceptor(new ApiKeyInterceptor())
+                .addInterceptor(new LanguageInterceptor());
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
