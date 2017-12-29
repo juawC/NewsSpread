@@ -90,8 +90,9 @@ public class NewsFragment extends DaggerFragment {
         LiveData<Resource<List<Article>>> articleList = mNewsViewModel.getArticles();
 
         // Bind article adapter
-        binding.setAdapter(new NewsAdapter(this, mDataBindingComponent,
-                mCustomTabHelper, articleList));
+        NewsAdapter newsAdapter = new NewsAdapter(mDataBindingComponent, mCustomTabHelper);
+        newsAdapter.setLiveData(this, articleList);
+        binding.setAdapter(newsAdapter);
 
         // Bind list divider
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),
