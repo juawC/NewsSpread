@@ -24,6 +24,7 @@ allprojects {
 
 ext {
     androidSupportLibV = "27.0.2"
+    daggerVersion = "2.14.1"
 }
 
 task clean(type: Delete) {

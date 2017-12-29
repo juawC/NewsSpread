@@ -1,12 +1,12 @@
 package com.juawapps.newsspread.ui.news;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingComponent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.view.LayoutInflater;
@@ -19,23 +19,28 @@ import com.juawapps.newsspread.data.Resource;
 import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.databinding.FragmentNewsListBinding;
 import com.juawapps.newsspread.utils.biding.FragmentDataBindingComponent;
-import com.juawapps.newsspread.utils.viewmodel.ViewModelFactory;
 import com.juawapps.newsspread.web.CustomTabHelper;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
 
 /**
  * A fragment representing a list of Items.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends DaggerFragment {
 
     private static final String ARG_NEWS_CATEGORY = "news-category";
     private NewsCategory mNewsCategory;
     private NewsViewModel mNewsViewModel;
     private final DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
     private CustomTabHelper mCustomTabHelper;
+
+    @Inject
+    ViewModelProvider.Factory mViewModelFactory;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -63,8 +68,7 @@ public class NewsFragment extends Fragment {
             Timber.d("Fragment initialized without category!");
         }
 
-        mNewsViewModel = ViewModelProviders.of(this,
-                ViewModelFactory.getInstance(getActivity().getApplication())).get(NewsViewModel.class);
+        mNewsViewModel = ViewModelProviders.of(this, mViewModelFactory).get(NewsViewModel.class);
         mCustomTabHelper = CustomTabHelper.get(getActivity());
     }
 

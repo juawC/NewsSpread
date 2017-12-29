@@ -20,11 +20,7 @@ import static com.juawapps.newsspread.data.api.ApiConfigs.HOST;
 
 public class ApiProvider {
 
-    private static ApiProvider sInstance;
-
-    private final NewsapiService mNewsapiService;
-
-    private ApiProvider() {
+    public static NewsapiService getApiService() {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new ApiKeyInterceptor())
@@ -41,22 +37,7 @@ public class ApiProvider {
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .build();
 
-        mNewsapiService = retrofit.create(NewsapiService.class);
-    }
-
-    private static ApiProvider getInstance() {
-        if (sInstance == null) {
-            synchronized (ApiProvider.class) {
-                if (sInstance == null) {
-                    sInstance = new ApiProvider();
-                }
-            }
-        }
-        return sInstance;
-    }
-
-    public static NewsapiService getNewsapiService () {
-        return getInstance().mNewsapiService;
+        return retrofit.create(NewsapiService.class);
     }
 
 }

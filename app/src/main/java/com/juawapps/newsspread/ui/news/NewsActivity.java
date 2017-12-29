@@ -1,8 +1,7 @@
-package com.juawapps.newsspread.ui;
+package com.juawapps.newsspread.ui.news;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -17,9 +16,10 @@ import com.juawapps.newsspread.ui.news.NewsFragment;
 
 import java.util.List;
 
+import dagger.android.support.DaggerAppCompatActivity;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class NewsActivity extends DaggerAppCompatActivity {
 
 
     private final NewsCategoriesManager mCategoriesManager = new NewsCategoriesManager();

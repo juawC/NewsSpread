@@ -1,15 +1,12 @@
 package com.juawapps.newsspread.data;
 
 import android.arch.lifecycle.LiveData;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
 
-import com.juawapps.newsspread.data.api.ApiProvider;
 import com.juawapps.newsspread.data.api.ApiResponseWrapper;
 import com.juawapps.newsspread.data.db.ArticleDao;
-import com.juawapps.newsspread.data.db.DatabaseProvider;
 import com.juawapps.newsspread.data.db.DbConfigs;
 import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.data.api.NewsapiService;
@@ -17,26 +14,19 @@ import com.juawapps.newsspread.data.api.NewsapiService;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class ArticlesRepository {
+
     private final NewsapiService mNewsapiService;
     private final ArticleDao mArticleDao;
-    private static ArticlesRepository sInstance;
 
-    private ArticlesRepository(Context applicationContext) {
-        mNewsapiService = ApiProvider.getNewsapiService();
-        mArticleDao = DatabaseProvider.getAppDatabase(applicationContext).articleDao();
-    }
-
-    public static ArticlesRepository getInstance(Context applicationContext) {
-        if (sInstance == null) {
-            synchronized (ArticlesRepository.class) {
-                if (sInstance == null) {
-                    sInstance = new ArticlesRepository(applicationContext);
-                }
-            }
-        }
-        return sInstance;
+    @Inject
+    public ArticlesRepository(NewsapiService newsapiService, ArticleDao articleDao) {
+        mNewsapiService = newsapiService;
+        mArticleDao = articleDao;
     }
 
     public LiveData<Resource<List<Article>>> getArticles(String categoryKey) {
