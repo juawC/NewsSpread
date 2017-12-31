@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Date;
 
-@SuppressWarnings("NullableProblems")
+@SuppressWarnings({"NullableProblems", "unused"})
 @Entity(tableName = "articles", primaryKeys = {"author", "title"})
 public class Article {
 
@@ -32,6 +32,20 @@ public class Article {
     @ColumnInfo(name = "published_at")
     private Date publishedAt;
     private String category;
+
+    public Article(ArticleSource source, @NonNull String author, @NonNull String title,
+                   String description, String url, String urlToImage,
+                   Date publishedAt, String category) {
+
+        this.source = source;
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.category = category;
+    }
 
     public ArticleSource getSource() {
         return source;

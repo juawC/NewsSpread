@@ -1,5 +1,6 @@
 package com.juawapps.newsspread.data.objects;
 
+@SuppressWarnings("unused")
 public class ArticleSource {
     /**
      * id : bbc-news
@@ -8,6 +9,11 @@ public class ArticleSource {
 
     private String id;
     private String name;
+
+    public ArticleSource(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public String getId() {
         return id;
