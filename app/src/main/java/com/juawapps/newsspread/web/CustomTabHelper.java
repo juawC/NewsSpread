@@ -13,35 +13,26 @@ import android.support.v4.content.ContextCompat;
 
 import com.juawapps.newsspread.R;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Manage custom tabs, warming up the service for the tabs to load faster.
  */
-
+@Singleton
 public class CustomTabHelper {
 
     private CustomTabsIntent mCustomTabsIntent;
     private static final String CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome";
 
-    private static CustomTabHelper sInstance;
-
-    public static CustomTabHelper get(Activity activity) {
-        if (sInstance == null) {
-            synchronized (CustomTabHelper.class) {
-                if (sInstance == null) {
-                    sInstance = new CustomTabHelper(activity);
-                }
-            }
-        }
-        return sInstance;
-    }
-
-    private CustomTabHelper(Activity activity) {
-        CustomTabsClient.bindCustomTabsService(activity, CUSTOM_TAB_PACKAGE_NAME,
+    @Inject
+    public CustomTabHelper(Context context) {
+        CustomTabsClient.bindCustomTabsService(context, CUSTOM_TAB_PACKAGE_NAME,
                 new CustomTabsServiceConnection() {
             @Override
             public void onCustomTabsServiceConnected(ComponentName name, CustomTabsClient client) {
                 client.warmup(0);
-                mCustomTabsIntent = buildIntent(client, activity);
+                mCustomTabsIntent = buildIntent(client, context);
             }
 
             @Override
@@ -60,14 +51,14 @@ public class CustomTabHelper {
         }
     }
 
-    private CustomTabsIntent buildIntent(CustomTabsClient customTabsClient, Activity activity) {
+    private CustomTabsIntent buildIntent(CustomTabsClient customTabsClient, Context context) {
         // Create session
         CustomTabsSession customTabsSession = customTabsClient.newSession(null);
         // Built intent
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder(customTabsSession);
-        builder.setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary));
-        builder.setStartAnimations(activity, R.anim.slide_in_right, R.anim.slide_out_left);
-        builder.setExitAnimations(activity, R.anim.slide_in_left, R.anim.slide_out_right);
+        builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary));
+        builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left);
+        builder.setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right);
         return builder.build();
     }
 }

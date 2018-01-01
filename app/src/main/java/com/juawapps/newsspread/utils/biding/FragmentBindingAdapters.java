@@ -4,7 +4,7 @@ import android.databinding.BindingAdapter;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
-import com.juawapps.newsspread.glide.GlideApp;
+import com.juawapps.newsspread.image.ImageLoaderWrapper;
 
 import timber.log.Timber;
 
@@ -15,13 +15,15 @@ import timber.log.Timber;
 @SuppressWarnings("WeakerAccess")
 public class FragmentBindingAdapters {
     private final Fragment fragment;
+    final ImageLoaderWrapper imageLoaderWrapper;
 
-    public FragmentBindingAdapters(Fragment fragment) {
+    public FragmentBindingAdapters(Fragment fragment, ImageLoaderWrapper imageLoaderWrapper) {
         this.fragment = fragment;
+        this.imageLoaderWrapper = imageLoaderWrapper;
     }
     @BindingAdapter("imageUrl")
     public void bindImage(ImageView imageView, String url) {
         Timber.d("Loading image with glide: %s", url);
-        GlideApp.with(fragment).load(url).centerCrop().into(imageView);
+        imageLoaderWrapper.fetchImageToView(fragment, url, imageView);
     }
 }

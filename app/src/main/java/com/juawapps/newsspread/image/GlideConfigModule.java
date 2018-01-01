@@ -1,4 +1,4 @@
-package com.juawapps.newsspread.glide;
+package com.juawapps.newsspread.image;
 
 
 import com.bumptech.glide.annotation.GlideModule;

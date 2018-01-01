@@ -3,15 +3,20 @@ package com.juawapps.newsspread.utils.biding;
 import android.databinding.DataBindingComponent;
 import android.support.v4.app.Fragment;
 
+import com.juawapps.newsspread.image.ImageLoaderWrapper;
+
+import javax.inject.Inject;
+
 /**
- * Component for seting fragment binding adapters.
+ * Component to set fragment binding adapters.
  */
 
 public class FragmentDataBindingComponent implements DataBindingComponent {
     private final FragmentBindingAdapters adapter;
 
-    public FragmentDataBindingComponent(Fragment fragment) {
-        this.adapter = new FragmentBindingAdapters(fragment);
+    @Inject
+    public FragmentDataBindingComponent(Fragment fragment, ImageLoaderWrapper imageLoaderWrapper) {
+        this.adapter = new FragmentBindingAdapters(fragment, imageLoaderWrapper);
     }
 
     @Override

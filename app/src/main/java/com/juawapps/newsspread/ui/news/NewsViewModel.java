@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.VisibleForTesting;
 
 import com.juawapps.newsspread.data.ArticlesRepository;
 import com.juawapps.newsspread.data.Resource;
@@ -27,15 +28,18 @@ public class NewsViewModel extends ViewModel implements RetryCallback {
         mResultStream = Transformations.switchMap(mRequestStream, articlesRepository::getArticles);
     }
 
+    @VisibleForTesting
     public void setCategory(String category) {
         mRequestStream.postValue(category);
         mCategory = category;
     }
 
-    LiveData<Resource<List<Article>>> getArticles() {
+    @VisibleForTesting
+    public LiveData<Resource<List<Article>>> getArticles() {
         return mResultStream;
     }
 
+    @VisibleForTesting
     @Override
     public void onRetry() {
         setCategory(mCategory);

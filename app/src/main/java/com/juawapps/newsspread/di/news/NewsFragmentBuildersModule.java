@@ -13,6 +13,6 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class NewsFragmentBuildersModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = NewsFragmentModule.class)
     abstract NewsFragment contributeNewsFragment();
 }

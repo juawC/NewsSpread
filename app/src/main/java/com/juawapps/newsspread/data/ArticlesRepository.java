@@ -17,13 +17,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@Singleton
 public class ArticlesRepository {
 
     private final NewsapiService mNewsapiService;
     private final ArticleDao mArticleDao;
 
-    @Inject
     public ArticlesRepository(NewsapiService newsapiService, ArticleDao articleDao) {
         mNewsapiService = newsapiService;
         mArticleDao = articleDao;

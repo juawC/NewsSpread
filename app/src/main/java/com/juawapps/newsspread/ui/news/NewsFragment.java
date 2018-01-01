@@ -36,8 +36,12 @@ public class NewsFragment extends DaggerFragment {
     private static final String ARG_NEWS_CATEGORY = "news-category";
     private NewsCategory mNewsCategory;
     private NewsViewModel mNewsViewModel;
-    private final DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
-    private CustomTabHelper mCustomTabHelper;
+
+    @Inject
+    FragmentDataBindingComponent mDataBindingComponent;
+
+    @Inject
+    CustomTabHelper mCustomTabHelper;
 
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
@@ -69,7 +73,6 @@ public class NewsFragment extends DaggerFragment {
         }
 
         mNewsViewModel = ViewModelProviders.of(this, mViewModelFactory).get(NewsViewModel.class);
-        mCustomTabHelper = CustomTabHelper.get(getActivity());
     }
 
     @Override
