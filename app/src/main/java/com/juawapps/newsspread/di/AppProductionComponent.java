@@ -1,7 +1,6 @@
 package com.juawapps.newsspread.di;
 
 import com.juawapps.newsspread.NewSpreadApplication;
-import com.juawapps.newsspread.di.viewmodel.ViewModelModule;
 
 import javax.inject.Singleton;
 
@@ -17,13 +16,13 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         AndroidSupportInjectionModule.class,
         ActivityBuildersModule.class,
-        AppModule.class,
-        AppModuleApi.class,
-        AppModuleDatabase.class,
+        AppModuleBase.class,
+        AppModuleApplication.class,
         AppModuleImageLoader.class,
-        AppModuleRepository.class
+        AppModuleRepository.class,
+        AppModuleCustomTabHelper.class
       })
-public interface AppComponent extends AndroidInjector<NewSpreadApplication> {
+public interface AppProductionComponent extends AndroidInjector<NewSpreadApplication> {
       @Component.Builder
       abstract class Builder extends AndroidInjector.Builder<NewSpreadApplication> {}
 }

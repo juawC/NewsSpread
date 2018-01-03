@@ -10,7 +10,7 @@ import com.juawapps.newsspread.TestApp;
  * Custom runner to disable dependency injection.
  */
 
-public class NoDiTestRunner extends AndroidJUnitRunner {
+public class CustomTestRunner extends AndroidJUnitRunner {
     @Override
     public Application newApplication(ClassLoader cl, String className, Context context)
             throws InstantiationException, IllegalAccessException, ClassNotFoundException {

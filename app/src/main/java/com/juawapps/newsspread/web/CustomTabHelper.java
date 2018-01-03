@@ -13,19 +13,14 @@ import android.support.v4.content.ContextCompat;
 
 import com.juawapps.newsspread.R;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 /**
  * Manage custom tabs, warming up the service for the tabs to load faster.
  */
-@Singleton
 public class CustomTabHelper {
 
     private CustomTabsIntent mCustomTabsIntent;
     private static final String CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome";
 
-    @Inject
     public CustomTabHelper(Context context) {
         CustomTabsClient.bindCustomTabsService(context, CUSTOM_TAB_PACKAGE_NAME,
                 new CustomTabsServiceConnection() {

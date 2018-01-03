@@ -13,6 +13,7 @@ import java.util.Date;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class ObjectCreatorsUtil {
 
+        public static final String DEFAULT_ARTICLE_TITLE = "Pointless title.";
         public static final String DEFAULT_ARTICLE_AUTHOR = "NotPutin";
         public static final String DEFAULT_ARTICLE_DESCRIPTION = "news stuff";
         public static final String DEFAULT_ARTICLE_URL = "https://www.google.com";
@@ -39,6 +40,12 @@ public class ObjectCreatorsUtil {
     public static ArticleSource createArticleSource(String sourceName) {
 
         return new ArticleSource(DEFAULT_SOURCE_ID, sourceName);
+    }
+
+    public static Article createArticle() {
+        return new Article(createArticleSource(DEFAULT_SOURCE_NAME), DEFAULT_ARTICLE_AUTHOR,
+                DEFAULT_ARTICLE_TITLE, DEFAULT_ARTICLE_DESCRIPTION, DEFAULT_ARTICLE_URL,
+                DEFAULT_ARTICLE_URL_TO_IMAGE, DEFAULT_ARTICLE_PUBLISHED_AT, DEFAULT_ARTICLE_CATEGORY);
     }
 
     public static Article createArticle(String title) {

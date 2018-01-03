@@ -1,4 +1,4 @@
-package com.juawapps.newsspread.di;
+package com.juawapps.newsspread.di.base;
 
 import android.content.Context;
 

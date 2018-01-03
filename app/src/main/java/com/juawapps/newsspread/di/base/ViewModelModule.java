@@ -1,4 +1,4 @@
-package com.juawapps.newsspread.di.viewmodel;
+package com.juawapps.newsspread.di.base;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;

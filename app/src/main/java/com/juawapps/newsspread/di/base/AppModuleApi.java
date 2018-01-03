@@ -1,4 +1,4 @@
-package com.juawapps.newsspread.di;
+package com.juawapps.newsspread.di.base;
 
 import com.juawapps.newsspread.data.api.ApiProvider;
 import com.juawapps.newsspread.data.api.NewsapiService;

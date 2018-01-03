@@ -2,7 +2,7 @@ package com.juawapps.newsspread;
 
 
 
-import com.juawapps.newsspread.di.DaggerAppComponent;
+import com.juawapps.newsspread.di.DaggerAppProductionComponent;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
@@ -20,7 +20,7 @@ public class NewSpreadApplication extends DaggerApplication {
     }
 
     @Override
-    protected AndroidInjector<? extends NewSpreadApplication> applicationInjector() {
-        return DaggerAppComponent.builder().create(this);
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppProductionComponent.builder().create(this);
     }
 }
