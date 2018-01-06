@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
+import timber.log.Timber;
 
 /**
  * Used to change the dependencies.
@@ -24,6 +25,13 @@ public class TestApp extends DaggerApplication {
 
     @Inject
     CustomTabHelper mCustomTabHelper;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        Timber.plant(new Timber.DebugTree());
+    }
 
 
     @Override

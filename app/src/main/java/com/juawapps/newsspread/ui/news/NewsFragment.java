@@ -3,7 +3,6 @@ package com.juawapps.newsspread.ui.news;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingComponent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -92,6 +91,10 @@ public class NewsFragment extends DaggerFragment {
         // Get articles live data
         LiveData<Resource<List<Article>>> articleList = mNewsViewModel.getArticles();
 
+        // Bind view state view
+        articleList.observe(this, binding::setResource);
+        binding.setRetryCallback(mNewsViewModel);
+
         // Bind article adapter
         NewsAdapter newsAdapter = new NewsAdapter(mDataBindingComponent, mCustomTabHelper);
         newsAdapter.setLiveData(this, articleList);
@@ -104,10 +107,6 @@ public class NewsFragment extends DaggerFragment {
                 R.drawable.line_divider);
         dividerItemDecoration.setDrawable(dividerDrawable);
         binding.setDecoration(dividerItemDecoration);
-
-        // Bind view state view
-        articleList.observe(this, binding::setResource);
-        binding.setRetryCallback(mNewsViewModel);
 
         return binding.getRoot();
     }

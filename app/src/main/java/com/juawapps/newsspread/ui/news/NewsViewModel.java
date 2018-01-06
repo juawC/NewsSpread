@@ -28,13 +28,11 @@ public class NewsViewModel extends ViewModel implements RetryCallback {
         mResultStream = Transformations.switchMap(mRequestStream, articlesRepository::getArticles);
     }
 
-    @VisibleForTesting
     public void setCategory(String category) {
         mRequestStream.postValue(category);
         mCategory = category;
     }
 
-    @VisibleForTesting
     public LiveData<Resource<List<Article>>> getArticles() {
         return mResultStream;
     }

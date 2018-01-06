@@ -14,8 +14,6 @@ import com.juawapps.newsspread.data.api.NewsapiService;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class ArticlesRepository {
 

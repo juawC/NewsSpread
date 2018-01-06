@@ -14,8 +14,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,8 +38,9 @@ import org.junit.runner.RunWith;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
- * <Insert meaningful description>.
+ * Fragment news test.
  */
 @RunWith(AndroidJUnit4.class)
 public class NewsFragmentTest {
@@ -47,17 +48,20 @@ public class NewsFragmentTest {
     public ActivityTestRule<SingleFragmentActivity> mActivityRule =
             new ActivityTestRule<>(SingleFragmentActivity.class, true, true);
 
-    private final MutableLiveData<Resource<List<Article>>> mArticlesList = new MutableLiveData<>();
-
+    private MutableLiveData<Resource<List<Article>>> mArticlesList;
     private final ArticlesRepository mArticlesRepository = TestApp.get().getArticlesRepository();
     private final CustomTabHelper mCustomTabHelper = TestApp.get().getCustomTabHelper();
 
     @Before
     public void init() throws Throwable {
-        mActivityRule.getActivity().setFragment(NewsFragment.newInstance(
-                new NewsCategory("key", R.string.general_label)));
+        String categoryKey = "category-key";
 
-        when(mArticlesRepository.getArticles(anyString())).thenReturn(mArticlesList);
+        reset(mArticlesRepository);
+        mArticlesList = new MutableLiveData<>();
+        when(mArticlesRepository.getArticles(categoryKey)).thenReturn(mArticlesList);
+
+        mActivityRule.getActivity().replaceFragment(NewsFragment.newInstance(
+                new NewsCategory(categoryKey, R.string.general_label)));
     }
 
     @Test
@@ -72,10 +76,14 @@ public class NewsFragmentTest {
     public void error() throws InterruptedException {
         Article article = ObjectCreatorsUtil.createArticle();
         List<Article> articleList = Collections.singletonList(article);
+
         mArticlesList.postValue(Resource.error("error", null));
+
         onView(withId(R.id.spin_kit)).check(matches(not(isDisplayed())));
+        verify(mArticlesRepository).getArticles(eq("category-key"));
         onView(withId(R.id.error_text_title)).check(matches(isDisplayed()));
         onView(withId(R.id.error_retry_button)).check(matches(isDisplayed()));
+
         onView(withId(R.id.error_retry_button)).perform(click());
         mArticlesList.postValue(Resource.success(articleList));
         onView(withId(R.id.news_item_title)).check(matches(withText(article.getTitle())));
