@@ -1,0 +1,54 @@
+{
+  "status": "ok",
+  "totalResults": 4,
+  "articles": [
+  {
+    "source": {
+      "id": "techcrunch",
+      "name": "TechCrunch"
+    },
+    "author": "Jon Evans",
+    "title": "The cryptocurrency bubble is strangling innovation",
+    "description": "Sure, fine, maybe it's a bubble. OK it's definitely a bubble, but that's a good thing, a bubble brings attention and investment in infrastructure, which..",
+    "url": "https://techcrunch.com/2018/01/07/the-cryptocurrency-bubble-is-strangling-innovation/",
+    "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2018/01/sorong-python.jpg",
+    "publishedAt": "2018-01-07T14:00:16Z"
+  },
+  {
+    "source": {
+      "id": "techcrunch",
+      "name": "TechCrunch"
+    },
+    "author": "Brian Heater",
+    "title": "Google has planted its flag at CES",
+    "description": "Google’s here, and it’s planning something big. The company’s presence is impossible to miss as you drive down Paradise Road toward the Las Vegas..",
+    "url": "https://techcrunch.com/2018/01/06/google-has-planted-its-flag-at-ces/",
+    "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2018/01/dscf3575.jpg",
+    "publishedAt": "2018-01-06T22:27:12Z"
+  },
+  {
+    "source": {
+      "id": "techcrunch",
+      "name": "TechCrunch"
+    },
+    "author": "Danny Crichton",
+    "title": "RIP IPO (1602-2018)",
+    "description": "In comparison to an anemic 2016 for venture-backed technology IPOs, 2017 was a much better year. Companies as diverse as Yext, Cloudera, Blue Apron,..",
+    "url": "https://techcrunch.com/2018/01/06/rip-ipo-1602-2018/",
+    "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2018/01/gettyimages-83164715.jpg",
+    "publishedAt": "2018-01-06T19:35:17Z"
+  },
+  {
+    "source": {
+      "id": "techcrunch",
+      "name": "TechCrunch"
+    },
+    "author": "Brian Heater",
+    "title": "Cassette tapes are back, kind of",
+    "description": "Add the surprise return of the cassette tape to the long list of why the last couple of years have been some of the strangest in recent memory. After a number..",
+    "url": "https://techcrunch.com/2018/01/06/cassette-tapes-are-back-kind-of/",
+    "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2018/01/cassette.jpg",
+    "publishedAt": "2018-01-06T18:57:12Z"
+  }
+]
+}

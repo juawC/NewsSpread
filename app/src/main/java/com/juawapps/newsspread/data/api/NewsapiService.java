@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 public interface NewsapiService {
 
     @GET("v2/top-headlines")
-    LiveData<ApiResponseWrapper<List<Article>>> topHeadLines(@Query("category") String apiKey);
+    LiveData<ApiResponseWrapper<List<Article>>> topHeadLines(@Query("category") String category);
 
     @GET("v2/sources")
     LiveData<ApiResponseWrapper<List<Source>>> sources();

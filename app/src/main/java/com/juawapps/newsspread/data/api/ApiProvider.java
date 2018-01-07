@@ -11,6 +11,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.juawapps.newsspread.data.api.ApiConfigs.DATE_FORMAT;
 import static com.juawapps.newsspread.data.api.ApiConfigs.HOST;
 
 
@@ -27,7 +28,7 @@ public class ApiProvider {
                 .addInterceptor(new LanguageInterceptor());
 
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .setDateFormat(DATE_FORMAT)
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
