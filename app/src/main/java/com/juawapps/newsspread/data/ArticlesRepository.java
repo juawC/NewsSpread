@@ -10,6 +10,7 @@ import com.juawapps.newsspread.data.db.ArticleDao;
 import com.juawapps.newsspread.data.db.DbConfigs;
 import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.data.api.NewsapiService;
+import com.juawapps.newsspread.utils.AppExecutors;
 
 import java.util.Calendar;
 import java.util.List;
@@ -19,14 +20,17 @@ public class ArticlesRepository {
 
     private final NewsapiService mNewsapiService;
     private final ArticleDao mArticleDao;
+    private final AppExecutors mAppExecutors;
 
-    public ArticlesRepository(NewsapiService newsapiService, ArticleDao articleDao) {
+    public ArticlesRepository(NewsapiService newsapiService, ArticleDao articleDao,
+                              AppExecutors appExecutors) {
         mNewsapiService = newsapiService;
         mArticleDao = articleDao;
+        mAppExecutors = appExecutors;
     }
 
     public LiveData<Resource<List<Article>>> getArticles(String categoryKey) {
-        return new NetworkBoundResource<List<Article>, List<Article>>() {
+        return new NetworkBoundResource<List<Article>, List<Article>>(mAppExecutors) {
 
             @Override
             protected void saveCallResult(@NonNull List<Article> items) {

@@ -7,27 +7,31 @@ import android.support.annotation.NonNull;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class AppExecutors {
 
-    private static AppExecutors sInstance;
 
-    private final Executor mDiskIO = Executors.newSingleThreadExecutor();
+    private Executor mDiskIO;
 
-    private final Executor mNetworkIO =  Executors.newFixedThreadPool(3);
+    private Executor mNetworkIO;
 
-    private final Executor mMainThread = new MainThreadExecutor();
+    private Executor mMainThread;
 
-    public static AppExecutors get() {
-        if (sInstance == null) {
-            synchronized (AppExecutors.class) {
-                if (sInstance == null) {
-                    sInstance = new AppExecutors();
-                }
-            }
-        }
-        return sInstance;
+    public AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
+        this.mDiskIO = diskIO;
+        this.mNetworkIO = networkIO;
+        this.mMainThread = mainThread;
     }
+
+    @Inject
+    public AppExecutors() {
+        this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
+                new MainThreadExecutor());
+    }
+
 
     public Executor diskIO() {
         return mDiskIO;

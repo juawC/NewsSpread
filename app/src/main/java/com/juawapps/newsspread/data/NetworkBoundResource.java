@@ -39,9 +39,11 @@ import java.util.Objects;
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
+    private final AppExecutors mAppExecutors;
 
     @MainThread
-    NetworkBoundResource() {
+    NetworkBoundResource(AppExecutors appExecutors) {
+        mAppExecutors = appExecutors;
         result.setValue(Resource.loading(null));
         LiveData<ResultType> dbSource = loadFromDb();
         result.addSource(dbSource, data -> {
@@ -81,9 +83,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     @MainThread
     private void saveResultAndReInit(ApiResponseWrapper<RequestType> response) {
-        AppExecutors.get().diskIO().execute(() -> {
+        mAppExecutors.diskIO().execute(() -> {
             saveCallResult(processResponse(response));
-            AppExecutors.get().mainThread().execute(() ->
+            mAppExecutors.mainThread().execute(() ->
                     // we specially request a new live data,
                     // otherwise we will get immediately last cached value,
                     // which may not be updated with latest results received from network.
