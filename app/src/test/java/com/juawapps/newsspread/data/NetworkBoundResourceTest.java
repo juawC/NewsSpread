@@ -6,7 +6,6 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.ObjectsCompat;
 
 import com.juawapps.newsspread.data.api.ApiResponseWrapper;
 import com.juawapps.newsspread.utils.AppExecutors;
@@ -14,7 +13,8 @@ import com.juawapps.newsspread.utils.AppExecutors;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
 
 import java.util.Objects;
@@ -28,13 +28,13 @@ import retrofit2.Response;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-
+@SuppressWarnings("unchecked")
+@RunWith(JUnit4.class)
 public class NetworkBoundResourceTest {
 
     @Rule
@@ -44,10 +44,10 @@ public class NetworkBoundResourceTest {
 
     private NetworkBoundResource mNetworkBoundResource;
 
-    Function<TestValue, Void> mSaveCallResult;
-    Function<TestValue, Boolean> mShouldFetch;
-    MutableLiveData<TestValue> mDbData;
-    MutableLiveData<ApiResponseWrapper<TestValue>> mApiData;
+    private Function<TestValue, Void> mSaveCallResult;
+    private Function<TestValue, Boolean> mShouldFetch;
+    private MutableLiveData<TestValue> mDbData;
+    private MutableLiveData<ApiResponseWrapper<TestValue>> mApiData;
 
     Observer<Resource<TestValue>> mObserver;
 
