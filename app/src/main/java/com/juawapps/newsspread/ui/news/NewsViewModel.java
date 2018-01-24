@@ -12,6 +12,7 @@ import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.ui.common.RetryCallback;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -21,7 +22,6 @@ public class NewsViewModel extends ViewModel implements RetryCallback {
     private final MutableLiveData<String> mRequestStream = new MutableLiveData<>();
     private final LiveData<Resource<List<Article>>> mResultStream;
 
-    private String mCategory;
 
     @Inject
     public NewsViewModel (ArticlesRepository articlesRepository) {
@@ -29,8 +29,10 @@ public class NewsViewModel extends ViewModel implements RetryCallback {
     }
 
     public void setCategory(String category) {
-        mRequestStream.postValue(category);
-        mCategory = category;
+
+        if (!Objects.equals(category, mRequestStream.getValue())) {
+            mRequestStream.postValue(category);
+        }
     }
 
     public LiveData<Resource<List<Article>>> getArticles() {
@@ -40,6 +42,10 @@ public class NewsViewModel extends ViewModel implements RetryCallback {
     @VisibleForTesting
     @Override
     public void onRetry() {
-        setCategory(mCategory);
+
+        String current = mRequestStream.getValue();
+        if (current != null && !current.isEmpty()) {
+            mRequestStream.setValue(current);
+        }
     }
 }
