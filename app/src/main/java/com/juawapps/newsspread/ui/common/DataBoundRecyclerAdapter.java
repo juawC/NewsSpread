@@ -52,8 +52,7 @@ public abstract class DataBoundRecyclerAdapter <DataType, ViewBindingType extend
 
         liveData.observe(viewLifeCycle, articleResource -> {
 
-            if ((articleResource != null ? articleResource.status : null) == Resource.Status.SUCCESS &&
-                    articleResource.data != null) {
+            if (articleResource != null && articleResource.data != null) {
 
                 setData(articleResource.data);
             }

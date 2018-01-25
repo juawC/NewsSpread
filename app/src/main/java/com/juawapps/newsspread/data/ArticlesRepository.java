@@ -51,6 +51,7 @@ public class ArticlesRepository {
             @NonNull
             @Override
             protected LiveData<List<Article>> loadFromDb() {
+
                 return mArticleDao.loadArticlesByCategory(categoryKey);
             }
 

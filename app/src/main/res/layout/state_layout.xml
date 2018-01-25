@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="com.juawapps.newsspread.data.Resource" />
-
         <variable
             name="resource"
             type="com.juawapps.newsspread.data.Resource" />
@@ -19,7 +17,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:setVisible="@{resource != null ? !resource.hasData() : false}">
 
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spin_kit"
@@ -32,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setVisible="@{resource != null ? resource.status == Resource.Status.LOADING : false}" />
+            app:setVisible="@{resource != null ? resource.isLoading() : false}" />
 
         <ImageView
             android:id="@+id/error_icon"
@@ -44,7 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35000002"
             app:layout_constraintVertical_chainStyle="packed"
-            app:setVisible="@{resource != null ? resource.status == Resource.Status.ERROR : false}"
+            app:setVisible="@{resource != null ? resource.isError(): false}"
             app:srcCompat="@drawable/ic_error_cloud_off"
             tools:ignore="ContentDescription" />
 
@@ -59,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/error_icon"
-            app:setVisible="@{resource != null ? resource.status == Resource.Status.ERROR : false}" />
+            app:setVisible="@{resource != null ? resource.isError() : false}" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/error_retry_button"
@@ -74,6 +73,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/error_text_title"
-            app:setVisible="@{resource != null ? resource.status == Resource.Status.ERROR : false}" />
+            app:setVisible="@{resource != null ? resource.isError() : false}" />
     </android.support.constraint.ConstraintLayout>
 </layout>

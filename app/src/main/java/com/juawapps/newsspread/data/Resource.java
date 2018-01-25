@@ -8,6 +8,8 @@ package com.juawapps.newsspread.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.Collection;
+
 import static com.juawapps.newsspread.data.Resource.Status.ERROR;
 import static com.juawapps.newsspread.data.Resource.Status.LOADING;
 import static com.juawapps.newsspread.data.Resource.Status.SUCCESS;
@@ -87,5 +89,23 @@ public class Resource<T> {
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
+    }
+
+   public boolean hasData() {
+       return (data != null && data instanceof Collection && !((Collection) data).isEmpty()) ||
+               (data != null && !(data instanceof Collection));
+   }
+
+   public boolean isError() {
+        return status == ERROR;
+   }
+
+    public boolean isSuccess() {
+        return status == SUCCESS;
+    }
+
+
+    public boolean isLoading() {
+        return status == LOADING;
     }
 }

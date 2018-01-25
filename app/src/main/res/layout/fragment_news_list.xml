@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.juawapps.newsspread.data.Resource" />
-
         <variable
             name="adapter"
             type="android.support.v7.widget.RecyclerView.Adapter" />
@@ -30,7 +28,6 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
-            setVisible="@{resource != null ? resource.status == Resource.Status.SUCCESS : false}"
             android:name="com.juawapps.newsspread.news.NewsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

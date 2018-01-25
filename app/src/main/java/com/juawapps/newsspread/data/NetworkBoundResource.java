@@ -28,6 +28,8 @@ import com.juawapps.newsspread.utils.AppExecutors;
 
 import java.util.Objects;
 
+import timber.log.Timber;
+
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.
  * <p>
