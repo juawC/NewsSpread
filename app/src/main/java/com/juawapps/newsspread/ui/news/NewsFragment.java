@@ -1,26 +1,20 @@
 package com.juawapps.newsspread.ui.news;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.graphics.drawable.Drawable;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.juawapps.newsspread.R;
 import com.juawapps.newsspread.categories.NewsCategory;
-import com.juawapps.newsspread.data.Resource;
-import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.databinding.FragmentNewsListBinding;
 import com.juawapps.newsspread.utils.biding.FragmentDataBindingComponent;
 import com.juawapps.newsspread.web.CustomTabHelper;
 
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -86,27 +80,17 @@ public class NewsFragment extends DaggerFragment {
                              Bundle savedInstanceState) {
 
         FragmentNewsListBinding binding =
-                FragmentNewsListBinding.inflate(inflater, container, false);
+                DataBindingUtil.inflate(inflater, R.layout.fragment_news_list, container, false);
 
-        // Get articles live data
-        LiveData<Resource<List<Article>>> articleList = mNewsViewModel.getArticles();
 
-        // Bind view state view
-        articleList.observe(this, binding::setResource);
+        // Bind view model
+        binding.setLifecycleOwner(this);
         binding.setRetryCallback(mNewsViewModel);
+        binding.setNewsViewModel(mNewsViewModel);
 
         // Bind article adapter
         NewsAdapter newsAdapter = new NewsAdapter(mDataBindingComponent, mCustomTabHelper);
-        newsAdapter.setLiveData(this, articleList);
         binding.setAdapter(newsAdapter);
-
-        // Bind list divider
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL);
-        Drawable dividerDrawable = ContextCompat.getDrawable(getContext(),
-                R.drawable.line_divider);
-        dividerItemDecoration.setDrawable(dividerDrawable);
-        binding.setDecoration(dividerItemDecoration);
 
         return binding.getRoot();
     }

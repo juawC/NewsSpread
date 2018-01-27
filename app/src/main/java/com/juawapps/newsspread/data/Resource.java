@@ -108,4 +108,8 @@ public class Resource<T> {
     public boolean isLoading() {
         return status == LOADING;
     }
+
+    public Resource unParameterize() {
+        return this;
+    }
 }

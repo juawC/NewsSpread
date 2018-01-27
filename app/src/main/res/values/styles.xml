@@ -9,7 +9,8 @@
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="android:textColorPrimary">@color/amazingWhite</item>
         <item name="android:colorBackground">@color/colorBackground</item>
-<!--        <item name="android:actionBarStyle">@style/ActionBarWhiteText</item>-->
+        <item name="android:listDivider">@drawable/line_divider</item>
+        <!--        <item name="android:actionBarStyle">@style/ActionBarWhiteText</item>-->
         <!--<item name="android:actionBarWidgetTheme">@android:style/Theme.Holo</item>-->
     </style>
 

@@ -1,9 +1,6 @@
 package com.juawapps.newsspread.ui.common;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
 import android.databinding.ViewDataBinding;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -11,6 +8,8 @@ import android.view.ViewGroup;
 import com.juawapps.newsspread.data.Resource;
 
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Recycler view to be used with data bound views.
@@ -47,18 +46,19 @@ public abstract class DataBoundRecyclerAdapter <DataType, ViewBindingType extend
         notifyDataSetChanged();
     }
 
-    public void setLiveData(@NonNull LifecycleOwner viewLifeCycle,
-                            LiveData<Resource<List<DataType>>> liveData) {
+    public void setDataResource(@Nullable Resource resource) {
+        if (resource != null) {
 
-        liveData.observe(viewLifeCycle, articleResource -> {
-
-            if (articleResource != null && articleResource.data != null) {
-
-                setData(articleResource.data);
+            if (resource.data == null) {
+                setData(null);
+            } else if (!(resource.data instanceof List)) {
+                Timber.w("Setting wrong resource data: %s", resource.data.getClass());
+                return;
             }
-        });
-    }
 
+            setData((List) resource.data);
+        }
+    }
 
     protected abstract void bind(ViewBindingType binding, DataType item);
 

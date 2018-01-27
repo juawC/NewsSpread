@@ -1,14 +1,18 @@
 package com.juawapps.newsspread.utils.biding;
 
 import android.databinding.BindingAdapter;
+import android.databinding.adapters.ListenerUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.juawapps.newsspread.R;
+import com.juawapps.newsspread.data.Resource;
+import com.juawapps.newsspread.ui.common.DataBoundRecyclerAdapter;
+import com.juawapps.newsspread.ui.common.ItemDecorationFactory;
 import com.juawapps.newsspread.utils.ui.FormatUtils;
 
 import java.util.Date;
-
 /**
  * Data Binding adapters specific to the app.
  */
@@ -21,9 +25,28 @@ public class BindingAdapters {
         view.setAdapter(adapter);
     }
 
+    @BindingAdapter(value = "recyclerResource")
+    public static void setResource(RecyclerView recyclerView, Resource resource){
+
+        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        if(adapter instanceof DataBoundRecyclerAdapter){
+            ((DataBoundRecyclerAdapter)adapter).setDataResource(resource);
+        }
+    }
+
     @BindingAdapter("recyclerItemDecoration")
-    public static void addItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decoration) {
-        view.addItemDecoration(decoration);
+    public static void addItemDecoration(RecyclerView view, int decorationType,
+                                         int decorationTypeOld ) {
+
+        if (decorationType != decorationTypeOld) {
+            RecyclerView.ItemDecoration decoration = ItemDecorationFactory.create(decorationType, view);
+            RecyclerView.ItemDecoration decorationOld = ListenerUtil.trackListener(view,
+                    decoration, R.id.decoration_type);
+            if (decorationOld != null) {
+                view.removeItemDecoration(decorationOld);
+            }
+            if (decoration != null) view.addItemDecoration(decoration);
+        }
     }
 
     @BindingAdapter("setAgeFromDate")

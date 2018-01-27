@@ -19,33 +19,33 @@ import javax.inject.Inject;
 
 public class NewsViewModel extends ViewModel implements RetryCallback {
 
-    private final MutableLiveData<String> mRequestStream = new MutableLiveData<>();
-    private final LiveData<Resource<List<Article>>> mResultStream;
+    private final MutableLiveData<String> mCategory = new MutableLiveData<>();
+    private final LiveData<Resource<List<Article>>> mArticles;
 
 
     @Inject
     public NewsViewModel (ArticlesRepository articlesRepository) {
-        mResultStream = Transformations.switchMap(mRequestStream, articlesRepository::getArticles);
+        mArticles = Transformations.switchMap(mCategory, articlesRepository::getArticles);
     }
 
     public void setCategory(String category) {
 
-        if (!Objects.equals(category, mRequestStream.getValue())) {
-            mRequestStream.postValue(category);
+        if (!Objects.equals(category, mCategory.getValue())) {
+            mCategory.postValue(category);
         }
     }
 
     public LiveData<Resource<List<Article>>> getArticles() {
-        return mResultStream;
+        return mArticles;
     }
 
     @VisibleForTesting
     @Override
     public void onRetry() {
 
-        String current = mRequestStream.getValue();
+        String current = mCategory.getValue();
         if (current != null && !current.isEmpty()) {
-            mRequestStream.setValue(current);
+            mCategory.setValue(current);
         }
     }
 }

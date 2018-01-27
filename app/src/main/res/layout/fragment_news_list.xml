@@ -5,17 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.juawapps.newsspread.ui.common.ItemDecorationFactory"/>
         <variable
             name="adapter"
             type="android.support.v7.widget.RecyclerView.Adapter" />
 
         <variable
-            name="decoration"
-            type="android.support.v7.widget.RecyclerView.ItemDecoration" />
-
-        <variable
-            name="resource"
-            type="com.juawapps.newsspread.data.Resource" />
+            name="newsViewModel"
+            type="com.juawapps.newsspread.ui.news.NewsViewModel" />
 
         <variable
             name="retryCallback"
@@ -31,16 +28,17 @@
             android:name="com.juawapps.newsspread.news.NewsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             app:recyclerAdapter="@{adapter}"
-            app:recyclerItemDecoration="@{decoration}"
+            app:recyclerResource="@{newsViewModel.articles}"
+            app:recyclerItemDecoration="@{ItemDecorationFactory.DIVIDER_LIST_ITEM}"
             tools:context=".ui.news.NewsFragment"
             tools:listitem="@layout/news_item" />
 
         <include
             tools:visibility="gone"
             layout="@layout/state_layout"
-            bind:resource="@{resource}"
+            bind:resource="@{newsViewModel.articles.unParameterize()}"
             bind:retryCallback="@{retryCallback}" />
     </FrameLayout>
 
