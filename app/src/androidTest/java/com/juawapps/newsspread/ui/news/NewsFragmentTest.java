@@ -60,7 +60,7 @@ public class NewsFragmentTest {
         mArticlesList = new MutableLiveData<>();
         when(mArticlesRepository.getArticles(categoryKey)).thenReturn(mArticlesList);
 
-        mActivityRule.getActivity().replaceFragment(NewsFragment.newInstance(
+        mActivityRule.getActivity().replaceFragment(NewsFragment.Companion.newInstance(
                 new NewsCategory(categoryKey, R.string.general_label)));
     }
 
