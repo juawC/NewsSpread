@@ -98,7 +98,7 @@ public class NewsFragmentTest {
         onView(withId(R.id.news_item_subtitle)).check(matches(withText(article.getDescription())));
         onView(withId(R.id.news_item_source)).check(matches(withText(article.getSource().getName())));
         onView(withId(R.id.news_item_age)).check(
-                matches(withText(FormatUtils.dateToAge(
+                matches(withText(FormatUtils.INSTANCE.dateToAge(
                         mActivityRule.getActivity(), article.getPublishedAt()))));
         onView(withId(R.id.spin_kit)).check(matches(not(isDisplayed())));
     }

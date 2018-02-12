@@ -52,7 +52,7 @@ public class BindingAdapters {
     @BindingAdapter("setAgeFromDate")
     public static void setAgeFromDate(TextView view, Date date) {
 
-        view.setText(FormatUtils.dateToAge(view.getContext(), date));
+        view.setText(FormatUtils.INSTANCE.dateToAge(view.getContext(), date));
     }
 
     @BindingAdapter("setVisible")
