@@ -14,7 +14,7 @@ import timber.log.Timber
  */
 class FragmentBindingAdapters(private val fragment: Fragment, private val imageLoaderWrapper: ImageLoaderWrapper) {
     @BindingAdapter("imageUrl")
-    fun bindImage(imageView: ImageView, url: String) {
+    fun bindImage(imageView: ImageView, url: String?) {
         Timber.d("Loading image with glide: %s", url)
         imageLoaderWrapper.fetchImageToView(fragment, url, imageView)
     }
