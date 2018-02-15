@@ -78,7 +78,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             } else {
                 onFetchFailed();
                 result.addSource(dbSource,
-                        newData -> setValue(Resource.error(response.errorMessage, newData)));
+                        newData -> setValue(Resource.error(response.getErrorMessage(), newData)));
             }
         });
     }
@@ -107,7 +107,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     @WorkerThread
     private RequestType processResponse(ApiResponseWrapper<RequestType> response) {
-        return response.body;
+        return response.getBody();
     }
 
     @WorkerThread

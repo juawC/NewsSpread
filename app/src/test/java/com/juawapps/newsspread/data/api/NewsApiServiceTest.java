@@ -43,7 +43,7 @@ public class NewsApiServiceTest {
     @Before
     public void createService() throws IOException {
         Gson gson = new GsonBuilder()
-                .setDateFormat(DATE_FORMAT)
+                .setDateFormat(ApiConfigs.DATE_FORMAT)
                 .create();
 
         mService = new Retrofit.Builder()
@@ -61,7 +61,7 @@ public class NewsApiServiceTest {
         String category = "tech";
         mMockWebServer.enqueueResponse("top-headlines-tech.json");
 
-        List<Article> headLines = LiveDataTestUtil.getValue(mService.topHeadLines(category)).body;
+        List<Article> headLines = LiveDataTestUtil.getValue(mService.topHeadLines(category)).getBody();
 
         assertThat(headLines.size(), is(4));
 
@@ -82,8 +82,8 @@ public class NewsApiServiceTest {
         String category = "tech";
         mMockWebServer.enqueueResponse("top-headlines-error.json");
         ApiResponseWrapper<List<Article>> response = LiveDataTestUtil.getValue(mService.topHeadLines(category));
-        List<Article> responseBody = response.body;
-        int responseCode = response.code;
+        List<Article> responseBody = response.getBody();
+        int responseCode = response.getCode();
 
         assertNull(responseBody);
         assertThat(responseCode, is(500));
@@ -92,7 +92,7 @@ public class NewsApiServiceTest {
 
 
     private Date getDateFromString(String dateStr) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        DateFormat formatter = new SimpleDateFormat(ApiConfigs.DATE_FORMAT);
         Date date = formatter.parse(dateStr);
         return date;
     }

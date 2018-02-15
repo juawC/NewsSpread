@@ -24,9 +24,9 @@ public class ApiResponseWrapperTest {
         String exceptionStr = "Puff";
         Exception exception = new Exception(exceptionStr);
         ApiResponseWrapper<String> apiResponse = new ApiResponseWrapper<>(exception);
-        assertThat(apiResponse.body, nullValue());
-        assertThat(apiResponse.code, is(500));
-        assertThat(apiResponse.errorMessage, is(exceptionStr));
+        assertThat(apiResponse.getBody(), nullValue());
+        assertThat(apiResponse.getCode(), is(500));
+        assertThat(apiResponse.getErrorMessage(), is(exceptionStr));
         assertFalse(apiResponse.isSuccessful());
     }
 
@@ -35,9 +35,9 @@ public class ApiResponseWrapperTest {
         String successStr = "Yay";
 
         ApiResponseWrapper<String> apiResponse = new ApiResponseWrapper<>(Response.success(successStr));
-        assertThat(apiResponse.errorMessage, nullValue());
-        assertThat(apiResponse.code, is(200));
-        assertThat(apiResponse.body, is(successStr));
+        assertThat(apiResponse.getErrorMessage(), nullValue());
+        assertThat(apiResponse.getCode(), is(200));
+        assertThat(apiResponse.getBody(), is(successStr));
         assertTrue(apiResponse.isSuccessful());
     }
 
@@ -47,8 +47,8 @@ public class ApiResponseWrapperTest {
 
         ApiResponseWrapper<String> apiResponse = new ApiResponseWrapper<>(Response.error(404,
                 ResponseBody.create(MediaType.parse("application/json"), errorStr)));
-        assertThat(apiResponse.errorMessage, equalTo(errorStr));
-        assertThat(apiResponse.code, is(404));
+        assertThat(apiResponse.getErrorMessage(), equalTo(errorStr));
+        assertThat(apiResponse.getCode(), is(404));
         assertFalse(apiResponse.isSuccessful());
     }
 

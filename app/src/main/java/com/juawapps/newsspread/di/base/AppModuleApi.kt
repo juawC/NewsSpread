@@ -17,7 +17,7 @@ class AppModuleApi {
     @Provides
     @Singleton
     internal fun provideNewsApiService(): NewsapiService {
-        return ApiProvider.getApiService()
+        return ApiProvider.apiService
     }
 
 }
