@@ -7,13 +7,14 @@ import android.text.format.DateUtils;
 
 import com.juawapps.newsspread.data.api.ApiResponseWrapper;
 import com.juawapps.newsspread.data.db.ArticleDao;
-import com.juawapps.newsspread.data.db.DbConfigs;
 import com.juawapps.newsspread.data.objects.Article;
 import com.juawapps.newsspread.data.api.NewsapiService;
 import com.juawapps.newsspread.utils.AppExecutors;
 
 import java.util.Calendar;
 import java.util.List;
+
+import static com.juawapps.newsspread.data.db.DbConfigsKt.MAX_ARTICLE_AGE_DAYS;
 
 
 public class ArticlesRepository {
@@ -66,7 +67,7 @@ public class ArticlesRepository {
 
     private static long getOldestArticleAllowedDate() {
         return Calendar.getInstance().getTimeInMillis() -
-                DbConfigs.MAX_ARTICLE_AGE_DAYS * DateUtils.DAY_IN_MILLIS;
+                MAX_ARTICLE_AGE_DAYS * DateUtils.DAY_IN_MILLIS;
     }
 
 }
