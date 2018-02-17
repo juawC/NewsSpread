@@ -67,16 +67,16 @@ public class NewsActivityTest {
     @Test
     public void loadedFragment() {
         Article article = ObjectCreatorsUtil.createArticle();
-        mArticlesListFrag0.postValue(Resource.success(Collections.singletonList(article)));
+        mArticlesListFrag0.postValue(Resource.Companion.success(Collections.singletonList(article)));
         onView(allOf(withId(R.id.news_item_title), withText(article.getTitle()))).check(matches(isDisplayed()));
     }
 
     @Test
     public void switchFragment() {
         Article articleFirst = ObjectCreatorsUtil.createArticle("First");
-        mArticlesListFrag0.postValue(Resource.success(Collections.singletonList(articleFirst)));
+        mArticlesListFrag0.postValue(Resource.Companion.success(Collections.singletonList(articleFirst)));
         Article articleSecond = ObjectCreatorsUtil.createArticle("Second");
-        mArticlesListFrag1.postValue(Resource.success(Collections.singletonList(articleSecond)));
+        mArticlesListFrag1.postValue(Resource.Companion.success(Collections.singletonList(articleSecond)));
 
         onView(allOf(withId(R.id.news_item_title), withText(articleFirst.getTitle()))).check(matches(isDisplayed()));
 

@@ -86,16 +86,16 @@ public class ArticlesRepositoryTest {
         result.observeForever(mObserver);
 
         Mockito.verifyNoMoreInteractions(mNewsapiService);
-        Mockito.verify(mObserver).onChanged(Resource.loading(null));
+        Mockito.verify(mObserver).onChanged(Resource.Companion.loading(null));
 
         mLiveDataDb.postValue(null);
         Mockito.verify(mNewsapiService).topHeadLines(category);
         Mockito.verify(mArticleDao).insertArticles(articleList);
         mLiveDataDb.postValue(articleList);
 
-        Mockito.verify(mObserver).onChanged(Resource.success(articleList));
+        Mockito.verify(mObserver).onChanged(Resource.Companion.success(articleList));
         Mockito.verifyNoMoreInteractions(mNewsapiService);
-        assertThat(result.getValue().data.get(0).getCategory(), is(category));
+        assertThat(result.getValue().getData().get(0).getCategory(), is(category));
     }
 
 }

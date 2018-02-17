@@ -17,6 +17,9 @@
         <variable
             name="retryCallback"
             type="com.juawapps.newsspread.ui.common.RetryCallback" />
+
+        <import
+            type="com.juawapps.newsspread.data.Resource" />
     </data>
 
     <FrameLayout
@@ -38,7 +41,7 @@
         <include
             tools:visibility="gone"
             layout="@layout/state_layout"
-            bind:resource="@{newsViewModel.articles.unParameterize()}"
+            bind:resource="@{(Resource) newsViewModel.articles}"
             bind:retryCallback="@{retryCallback}" />
     </FrameLayout>
 

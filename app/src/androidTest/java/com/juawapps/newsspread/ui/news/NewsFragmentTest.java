@@ -66,7 +66,7 @@ public class NewsFragmentTest {
 
     @Test
     public void loading() {
-        mArticlesList.postValue(Resource.loading(null));
+        mArticlesList.postValue(Resource.Companion.loading(null));
         onView(withId(R.id.spin_kit)).check(matches(isDisplayed()));
         onView(withId(R.id.error_retry_button)).check(matches(not(isDisplayed())));
     }
@@ -77,7 +77,7 @@ public class NewsFragmentTest {
         Article article = ObjectCreatorsUtil.createArticle();
         List<Article> articleList = Collections.singletonList(article);
 
-        mArticlesList.postValue(Resource.error("error", null));
+        mArticlesList.postValue(Resource.Companion.error("error", null));
 
         onView(withId(R.id.spin_kit)).check(matches(not(isDisplayed())));
         verify(mArticlesRepository).getArticles(eq("category-key"));
@@ -85,7 +85,7 @@ public class NewsFragmentTest {
         onView(withId(R.id.error_retry_button)).check(matches(isDisplayed()));
 
         onView(withId(R.id.error_retry_button)).perform(click());
-        mArticlesList.postValue(Resource.success(articleList));
+        mArticlesList.postValue(Resource.Companion.success(articleList));
         onView(withId(R.id.news_item_title)).check(matches(withText(article.getTitle())));
     }
 
@@ -93,7 +93,7 @@ public class NewsFragmentTest {
     public void loadedArticle() {
         Article article = ObjectCreatorsUtil.createArticle();
         List<Article> articleList = Collections.singletonList(article);
-        mArticlesList.postValue(Resource.success(articleList));
+        mArticlesList.postValue(Resource.Companion.success(articleList));
         onView(withId(R.id.news_item_title)).check(matches(withText(article.getTitle())));
         onView(withId(R.id.news_item_subtitle)).check(matches(withText(article.getDescription())));
         onView(withId(R.id.news_item_source)).check(matches(withText(article.getSource().getName())));
@@ -107,7 +107,7 @@ public class NewsFragmentTest {
     public void clickArticle() {
         Article article = ObjectCreatorsUtil.createArticle();
         List<Article> articleList = Collections.singletonList(article);
-        mArticlesList.postValue(Resource.success(articleList));
+        mArticlesList.postValue(Resource.Companion.success(articleList));
         onView(withChild(withText(article.getTitle()))).perform(click());
         verify(mCustomTabHelper).openNewTab(eq(article.getUrl()), anyObject());
     }

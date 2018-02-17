@@ -98,11 +98,11 @@ public class NetworkBoundResourceTest {
 
 
         mNetworkBoundResource.asLiveData().observeForever(mObserver);
-        verify(mObserver).onChanged(Resource.loading(null));
+        verify(mObserver).onChanged(Resource.Companion.loading(null));
         reset(mObserver);
         mDbData.setValue(null);
         mApiData.setValue(new ApiResponseWrapper<>(Response.success(netWorkResult)));
-        verify(mObserver).onChanged(Resource.success(netWorkResult));
+        verify(mObserver).onChanged(Resource.Companion.success(netWorkResult));
         verifyNoMoreInteractions(mObserver);
     }
 
@@ -117,13 +117,13 @@ public class NetworkBoundResourceTest {
 
         mNetworkBoundResource.asLiveData().observeForever(mObserver);
 
-        verify(mObserver).onChanged(Resource.loading(null));
+        verify(mObserver).onChanged(Resource.Companion.loading(null));
         reset(mObserver);
 
         mDbData.setValue(null);
         mApiData.setValue(new ApiResponseWrapper<>(Response.error(500, body)));
         verify(mSaveCallResult, never()).apply(any());
-        verify(mObserver).onChanged(Resource.error("error", null));
+        verify(mObserver).onChanged(Resource.Companion.error("error", null));
         verifyNoMoreInteractions(mObserver);
     }
 
@@ -138,16 +138,16 @@ public class NetworkBoundResourceTest {
 
         mNetworkBoundResource.asLiveData().observeForever(mObserver);
 
-        verify(mObserver).onChanged(Resource.loading(null));
+        verify(mObserver).onChanged(Resource.Companion.loading(null));
         reset(mObserver);
 
         mDbData.setValue(dbTestValue);
         verify(mSaveCallResult, never()).apply(any());
-        verify(mObserver).onChanged(Resource.success(dbTestValue));
+        verify(mObserver).onChanged(Resource.Companion.success(dbTestValue));
         reset(mObserver);
 
         mDbData.setValue(dbTestValueNew);
-        verify(mObserver).onChanged(Resource.success(dbTestValueNew));
+        verify(mObserver).onChanged(Resource.Companion.success(dbTestValueNew));
         verifyNoMoreInteractions(mObserver);
     }
 
@@ -165,15 +165,15 @@ public class NetworkBoundResourceTest {
 
         mNetworkBoundResource.asLiveData().observeForever(mObserver);
 
-        verify(mObserver).onChanged(Resource.loading(null));
+        verify(mObserver).onChanged(Resource.Companion.loading(null));
         reset(mObserver);
 
         mDbData.setValue(dbTestValue);
-        verify(mObserver).onChanged(Resource.loading(dbTestValue));
+        verify(mObserver).onChanged(Resource.Companion.loading(dbTestValue));
         reset(mObserver);
 
         mApiData.setValue(new ApiResponseWrapper<>(Response.success(apiTestValue)));
-        verify(mObserver).onChanged(Resource.success(apiTestValue));
+        verify(mObserver).onChanged(Resource.Companion.success(apiTestValue));
         verifyNoMoreInteractions(mObserver);
         assertThat(mDbData.getValue(), is(apiTestValue));
     }

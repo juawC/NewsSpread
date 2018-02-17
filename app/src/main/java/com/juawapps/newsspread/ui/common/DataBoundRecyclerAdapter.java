@@ -49,14 +49,14 @@ public abstract class DataBoundRecyclerAdapter <DataType, ViewBindingType extend
     public void setDataResource(@Nullable Resource resource) {
         if (resource != null) {
 
-            if (resource.data == null) {
+            if (resource.getData() == null) {
                 setData(null);
-            } else if (!(resource.data instanceof List)) {
-                Timber.w("Setting wrong resource data: %s", resource.data.getClass());
+            } else if (!(resource.getData() instanceof List)) {
+                Timber.w("Setting wrong resource data: %s", resource.getData().getClass());
                 return;
             }
 
-            setData((List) resource.data);
+            setData((List) resource.getData());
         }
     }
 
