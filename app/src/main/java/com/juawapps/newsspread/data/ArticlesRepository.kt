@@ -2,6 +2,7 @@ package com.juawapps.newsspread.data
 
 import android.arch.lifecycle.LiveData
 import android.text.format.DateUtils
+import com.juawapps.newsspread.annotation.DebugOpenClass
 
 import com.juawapps.newsspread.data.api.ApiResponseWrapper
 import com.juawapps.newsspread.data.db.ArticleDao
@@ -13,7 +14,7 @@ import java.util.Calendar
 
 import com.juawapps.newsspread.data.db.MAX_ARTICLE_AGE_DAYS
 
-
+@DebugOpenClass
 class ArticlesRepository(private val mNewsApiService: NewsapiService,
                          private val mArticleDao: ArticleDao,
                          private val mAppExecutors: AppExecutors) {

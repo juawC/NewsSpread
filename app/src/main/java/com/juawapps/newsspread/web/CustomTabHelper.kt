@@ -10,12 +10,14 @@ import android.support.customtabs.CustomTabsServiceConnection
 import android.support.v4.content.ContextCompat
 
 import com.juawapps.newsspread.R
+import com.juawapps.newsspread.annotation.DebugOpenClass
 
 const val CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome"
 
 /**
  * Manage custom tabs, warming up the service for the tabs to load faster.
  */
+@DebugOpenClass
 class CustomTabHelper(context: Context) {
 
 

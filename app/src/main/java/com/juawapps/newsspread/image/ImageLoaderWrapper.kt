@@ -2,6 +2,7 @@ package com.juawapps.newsspread.image
 
 import android.support.v4.app.Fragment
 import android.widget.ImageView
+import com.juawapps.newsspread.annotation.DebugOpenClass
 
 /**
  * This is a wrapper class to use with an image loading and caching library.
@@ -10,7 +11,7 @@ import android.widget.ImageView
  * This class was created in order to enable glide to be easily mocked and in the future to easily
  * change the image loading lib.
  */
-
+@DebugOpenClass
 class ImageLoaderWrapper {
 
     fun fetchImageToView(fragment: Fragment, url: String?, imageView: ImageView) {
