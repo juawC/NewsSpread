@@ -10,7 +10,7 @@ import java.util.Date
  * Util class to create objects.
  */
 
-object ObjectCreatorsUtilInst {
+object ObjectCreatorsUtil {
 
     const val DEFAULT_ARTICLE_TITLE = "Pointless title."
     const val  DEFAULT_ARTICLE_AUTHOR = "NotPutin"

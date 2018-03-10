@@ -10,14 +10,13 @@ import java.util.concurrent.TimeUnit
  * Util to get a live data value with a timeout of 2 seconds.
  */
 
-object LiveDataTestUtilInst {
-    @Throws(InterruptedException::class)
+object LiveDataTestUtil {
     fun <T> getValue(liveData: LiveData<T>): T {
-        val data = arrayOfNulls<Any>(1)
         val latch = CountDownLatch(1)
+        var data : T? = null
         val observer = object : Observer<T> {
             override fun onChanged(o: T?) {
-                data[0] = o
+                data = o
                 latch.countDown()
                 liveData.removeObserver(this)
             }
@@ -25,6 +24,6 @@ object LiveDataTestUtilInst {
         liveData.observeForever(observer)
         latch.await(2, TimeUnit.SECONDS)
 
-        return data[0] as T
+        return data!!
     }
 }

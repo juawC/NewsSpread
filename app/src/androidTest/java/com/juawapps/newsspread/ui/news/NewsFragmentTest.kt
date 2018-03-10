@@ -20,7 +20,7 @@ import com.juawapps.newsspread.categories.NewsCategory
 import com.juawapps.newsspread.data.Resource
 import com.juawapps.newsspread.data.objects.Article
 import com.juawapps.newsspread.test.SingleFragmentActivity
-import com.juawapps.newsspread.util.ObjectCreatorsUtilInst
+import com.juawapps.newsspread.util.ObjectCreatorsUtil
 import com.juawapps.newsspread.utils.ui.FormatUtils
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.eq
@@ -76,7 +76,7 @@ class NewsFragmentTest {
     @Test
     @Throws(InterruptedException::class)
     fun error() {
-        val article = ObjectCreatorsUtilInst.createArticle()
+        val article = ObjectCreatorsUtil.createArticle()
         val articleList = listOf(article)
 
         mArticlesList.postValue(Resource.error<List<Article>>("error", null))
@@ -86,7 +86,7 @@ class NewsFragmentTest {
         onView(withId(R.id.error_text_title)).check(matches(isDisplayed()))
         onView(withId(R.id.error_retry_button)).check(matches(isDisplayed()))
 
-        var mArticlesListGood = MutableLiveData<Resource<List<Article>>>()
+        val mArticlesListGood = MutableLiveData<Resource<List<Article>>>()
         mArticlesListGood.postValue(Resource.success(articleList))
         `when`(mArticlesRepository.getArticles("category-key")).thenReturn(mArticlesListGood)
         onView(withId(R.id.error_retry_button)).perform(click())
@@ -96,7 +96,7 @@ class NewsFragmentTest {
 
     @Test
     fun loadedArticle() {
-        val article = ObjectCreatorsUtilInst.createArticle()
+        val article = ObjectCreatorsUtil.createArticle()
         val articleList = listOf(article)
         mArticlesList.postValue(Resource.success(articleList))
         onView(withId(R.id.news_item_title)).check(matches(withText(article.title)))
@@ -110,7 +110,7 @@ class NewsFragmentTest {
 
     @Test
     fun clickArticle() {
-        val article = ObjectCreatorsUtilInst.createArticle()
+        val article = ObjectCreatorsUtil.createArticle()
         val articleList = listOf(article)
         mArticlesList.postValue(Resource.success(articleList))
         onView(withChild(withText(article.title))).perform(click())

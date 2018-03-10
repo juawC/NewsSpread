@@ -2,10 +2,7 @@ package com.juawapps.newsspread.db
 
 import android.support.test.filters.MediumTest
 import android.support.test.runner.AndroidJUnit4
-
-import com.juawapps.newsspread.util.AppDatabaseResource
-import com.juawapps.newsspread.util.LiveDataTestUtilInst
-import com.juawapps.newsspread.util.ObjectCreatorsUtilInst
+import com.juawapps.newsspread.util.*
 
 import org.junit.Rule
 import org.junit.Test
@@ -38,25 +35,25 @@ class ArticleDaoTest {
         val articleInsert = mAppDatabaseResource.db.articleDao()
 
         // Insert article
-        val newArticle = ObjectCreatorsUtilInst.createArticle(articleTitle)
+        val newArticle = ObjectCreatorsUtil.createArticle(articleTitle)
         articleInsert.insertArticles(ArrayList(listOf(newArticle)))
 
         // Read article
-        val articleList = LiveDataTestUtilInst.getValue(articleInsert.loadAllArticles())
+        val articleList = LiveDataTestUtil.getValue(articleInsert.loadAllArticles())
 
         assertThat(articleList.size, `is`(1))
         val articleRead = articleList[0]
         assertThat(articleRead, notNullValue())
         assertThat(articleRead.title, `is`(articleTitle))
         assertThat(articleRead.source, notNullValue())
-        assertThat(articleRead.source?.id, `is`(ObjectCreatorsUtilInst.DEFAULT_SOURCE_ID))
-        assertThat(articleRead.source?.name, `is`(ObjectCreatorsUtilInst.DEFAULT_SOURCE_NAME))
-        assertThat(articleRead.author, `is`(ObjectCreatorsUtilInst.DEFAULT_ARTICLE_AUTHOR))
-        assertThat(articleRead.category, `is`(ObjectCreatorsUtilInst.DEFAULT_ARTICLE_CATEGORY))
-        assertThat(articleRead.description, `is`(ObjectCreatorsUtilInst.DEFAULT_ARTICLE_DESCRIPTION))
-        assertThat(articleRead.url, `is`(ObjectCreatorsUtilInst.DEFAULT_ARTICLE_URL))
-        assertThat(articleRead.urlToImage, `is`(ObjectCreatorsUtilInst.DEFAULT_ARTICLE_URL_TO_IMAGE))
-        assertThat(articleRead.publishedAt, `is`(ObjectCreatorsUtilInst.DEFAULT_ARTICLE_PUBLISHED_AT))
+        assertThat(articleRead.source?.id, `is`(ObjectCreatorsUtil.DEFAULT_SOURCE_ID))
+        assertThat(articleRead.source?.name, `is`(ObjectCreatorsUtil.DEFAULT_SOURCE_NAME))
+        assertThat(articleRead.author, `is`(ObjectCreatorsUtil.DEFAULT_ARTICLE_AUTHOR))
+        assertThat(articleRead.category, `is`(ObjectCreatorsUtil.DEFAULT_ARTICLE_CATEGORY))
+        assertThat(articleRead.description, `is`(ObjectCreatorsUtil.DEFAULT_ARTICLE_DESCRIPTION))
+        assertThat(articleRead.url, `is`(ObjectCreatorsUtil.DEFAULT_ARTICLE_URL))
+        assertThat(articleRead.urlToImage, `is`(ObjectCreatorsUtil.DEFAULT_ARTICLE_URL_TO_IMAGE))
+        assertThat(articleRead.publishedAt, `is`(ObjectCreatorsUtil.DEFAULT_ARTICLE_PUBLISHED_AT))
     }
 
     @Test
@@ -68,12 +65,12 @@ class ArticleDaoTest {
         val articleInsert = mAppDatabaseResource.db.articleDao()
 
         // Insert article twice
-        val newArticle = ObjectCreatorsUtilInst.createArticle(articleTitle)
+        val newArticle = ObjectCreatorsUtil.createArticle(articleTitle)
         articleInsert.insertArticles(listOf(newArticle))
         articleInsert.insertArticles(listOf(newArticle))
 
         // Read article
-        val articleList = LiveDataTestUtilInst.getValue(articleInsert.loadAllArticles())
+        val articleList = LiveDataTestUtil.getValue(articleInsert.loadAllArticles())
 
         assertThat(articleList.size, `is`(1))
     }
@@ -91,14 +88,14 @@ class ArticleDaoTest {
         val articleInsert = mAppDatabaseResource.db.articleDao()
 
         // Insert articles
-        val techArticle = ObjectCreatorsUtilInst.createArticle(articleTechTitle, techCategory)
-        val worldArticle = ObjectCreatorsUtilInst.createArticle(articleWorldTitle, worldCategory)
+        val techArticle = ObjectCreatorsUtil.createArticle(articleTechTitle, techCategory)
+        val worldArticle = ObjectCreatorsUtil.createArticle(articleWorldTitle, worldCategory)
         articleInsert.insertArticles(ArrayList(listOf(techArticle)))
         articleInsert.insertArticles(ArrayList(listOf(worldArticle)))
 
         // Read articles
-        val articleTechList = LiveDataTestUtilInst.getValue(articleInsert.loadArticlesByCategory(techCategory))
-        val articleWorldList = LiveDataTestUtilInst.getValue(articleInsert.loadArticlesByCategory(worldCategory))
+        val articleTechList = LiveDataTestUtil.getValue(articleInsert.loadArticlesByCategory(techCategory))
+        val articleWorldList = LiveDataTestUtil.getValue(articleInsert.loadArticlesByCategory(worldCategory))
 
         assertThat(articleTechList.size, `is`(1))
         assertThat(articleWorldList.size, `is`(1))

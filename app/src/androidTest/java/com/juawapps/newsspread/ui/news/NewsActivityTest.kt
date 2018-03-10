@@ -12,7 +12,6 @@ import com.juawapps.newsspread.categories.NewsCategoriesManager
 
 import com.juawapps.newsspread.data.Resource
 import com.juawapps.newsspread.data.objects.Article
-import com.juawapps.newsspread.util.ObjectCreatorsUtilInst
 
 import org.junit.Before
 import org.junit.Rule
@@ -26,6 +25,7 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
+import com.juawapps.newsspread.util.ObjectCreatorsUtil
 import org.hamcrest.CoreMatchers.allOf
 import org.mockito.Mockito.reset
 import org.mockito.Mockito.`when`
@@ -70,7 +70,7 @@ class NewsActivityTest {
 
     @Test
     fun loadedFragment() {
-        val article = ObjectCreatorsUtilInst.createArticle()
+        val article = ObjectCreatorsUtil.createArticle()
         mArticlesListFrag0.postValue(Resource.success(listOf(article)))
         mActivityRule.launchActivity(Intent())
 
@@ -79,9 +79,9 @@ class NewsActivityTest {
 
     @Test
     fun switchFragment() {
-        val articleFirst = ObjectCreatorsUtilInst.createArticle("First")
+        val articleFirst = ObjectCreatorsUtil.createArticle("First")
         mArticlesListFrag0.postValue(Resource.success(listOf(articleFirst)))
-        val articleSecond = ObjectCreatorsUtilInst.createArticle("Second")
+        val articleSecond = ObjectCreatorsUtil.createArticle("Second")
         mArticlesListFrag1.postValue(Resource.success(listOf(articleSecond)))
         mActivityRule.launchActivity(Intent())
 
