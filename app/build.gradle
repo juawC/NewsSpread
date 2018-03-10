@@ -34,7 +34,9 @@ android {
     sourceSets {
         String sharedTestDir = 'src/test-common/java'
         androidTest.kotlin.srcDirs += sharedTestDir
+        androidTest.java.srcDirs += sharedTestDir
         test.kotlin.srcDirs += sharedTestDir
+        test.java.srcDirs += sharedTestDir
     }
     dataBinding {
         enabled = true
